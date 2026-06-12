@@ -10,6 +10,7 @@
 
 <style>
 
+/* RESET */
 *{
 margin:0;
 padding:0;
@@ -18,23 +19,59 @@ font-family:'Montserrat',sans-serif;
 }
 
 body{
-background:#121212;
 color:white;
+overflow-x:hidden;
+background:#0a0a0a;
+}
+
+/* FUNDO ANIMADO ULTRA PREMIUM */
+body::before{
+content:"";
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:linear-gradient(-45deg,#1DB954,#5a0017,#0f0f0f,#2a2a2a);
+background-size:400% 400%;
+animation:gradient 12s ease infinite;
+z-index:-2;
+opacity:0.35;
+}
+
+@keyframes gradient{
+0%{background-position:0% 50%;}
+50%{background-position:100% 50%;}
+100%{background-position:0% 50%;}
+}
+
+/* brilho flutuante */
+body::after{
+content:"";
+position:fixed;
+width:100%;
+height:100%;
+background:url('https://i.imgur.com/3pC0J5F.png');
+opacity:0.05;
+z-index:-1;
 }
 
 /* LAYOUT */
 .spotify{
 display:flex;
 min-height:100vh;
+backdrop-filter: blur(10px);
 }
 
 /* SIDEBAR */
 .sidebar{
 width:260px;
-background:#000;
+background:rgba(0,0,0,0.7);
 padding:30px;
 position:fixed;
 height:100%;
+backdrop-filter: blur(10px);
+border-right:1px solid rgba(255,255,255,0.05);
 }
 
 .logo{
@@ -42,16 +79,19 @@ font-size:30px;
 font-weight:800;
 margin-bottom:40px;
 color:#1DB954;
-}
-
-.sidebar ul{
-list-style:none;
+text-shadow:0 0 20px #1DB954;
 }
 
 .sidebar li{
 padding:12px 0;
 color:#b3b3b3;
 font-size:18px;
+transition:.3s;
+}
+
+.sidebar li:hover{
+color:white;
+transform:translateX(5px);
 }
 
 /* CONTEÚDO */
@@ -59,14 +99,13 @@ font-size:18px;
 margin-left:260px;
 width:100%;
 padding:40px;
-background:linear-gradient(to bottom,#5a0017,#121212 35%);
 }
 
 /* HEADER */
 .header{
 display:flex;
 gap:30px;
-align-items:end;
+align-items:center;
 flex-wrap:wrap;
 }
 
@@ -74,13 +113,18 @@ flex-wrap:wrap;
 width:300px;
 height:300px;
 object-fit:cover;
-border-radius:12px;
-box-shadow:0 20px 40px rgba(0,0,0,.5);
+border-radius:20px;
+box-shadow:0 20px 60px rgba(0,0,0,.6);
+transition:.4s;
+}
+
+.capa:hover{
+transform:scale(1.03);
 }
 
 .info h1{
-font-size:60px;
-margin-bottom:10px;
+font-size:55px;
+text-shadow:0 0 20px rgba(0,0,0,0.5);
 }
 
 .info p{
@@ -99,11 +143,15 @@ font-size:18px;
 font-weight:700;
 cursor:pointer;
 transition:.3s;
+box-shadow:0 10px 30px rgba(0,0,0,.4);
+}
+
+.play:hover{
+transform:scale(1.05);
 }
 
 .play.ativo{
-transform:scale(1.05);
-box-shadow:0 0 20px rgba(29,185,84,.6);
+box-shadow:0 0 25px #1DB954;
 }
 
 /* SEÇÕES */
@@ -122,22 +170,26 @@ grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
 gap:20px;
 }
 
+/* CARD GLASS */
 .album{
-background:#181818;
+background:rgba(255,255,255,0.05);
 padding:15px;
-border-radius:15px;
+border-radius:20px;
+backdrop-filter: blur(10px);
+border:1px solid rgba(255,255,255,0.05);
 transition:.3s;
 }
 
 .album:hover{
-transform:translateY(-5px);
+transform:translateY(-8px);
+background:rgba(255,255,255,0.08);
 }
 
 .album img{
 width:100%;
 height:220px;
 object-fit:cover;
-border-radius:10px;
+border-radius:15px;
 }
 
 .album h3{
@@ -145,54 +197,31 @@ margin-top:10px;
 }
 
 .album p{
-color:#b3b3b3;
+color:#ccc;
 font-size:14px;
-margin-top:5px;
 }
 
 /* CARTA */
 .carta{
-background:#181818;
+background:rgba(255,255,255,0.05);
 padding:25px;
-border-radius:15px;
-line-height:1.9;
-}
-
-/* CONTADOR */
-.contador{
-font-size:28px;
-font-weight:700;
-color:#1DB954;
+border-radius:20px;
+backdrop-filter: blur(10px);
 }
 
 /* FOOTER */
 footer{
 text-align:center;
 padding:50px;
-color:#b3b3b3;
+color:#aaa;
 }
 
 /* RESPONSIVO */
 @media(max-width:900px){
-
-.sidebar{
-display:none;
-}
-
-.content{
-margin-left:0;
-}
-
-.info h1{
-font-size:38px;
-}
-
-.capa{
-width:100%;
-max-width:320px;
-height:auto;
-}
-
+.sidebar{display:none;}
+.content{margin-left:0;}
+.info h1{font-size:35px;}
+.capa{width:100%;max-width:320px;}
 }
 
 </style>
@@ -200,24 +229,20 @@ height:auto;
 
 <body>
 
-<!-- AUDIO PLAYER REAL -->
 <audio id="player"></audio>
 
 <div class="spotify">
 
-<!-- SIDEBAR -->
 <div class="sidebar">
 <div class="logo">🎵 Spotify</div>
 <ul>
 <li>🏠 Início</li>
-<li>❤️ João & Raissa</li>
+<li>❤️ Amor</li>
 <li>🎶 Música</li>
-<li>📀 Nossos Álbuns</li>
 <li>💌 Carta</li>
 </ul>
 </div>
 
-<!-- CONTEÚDO -->
 <div class="content">
 
 <div class="header">
@@ -225,83 +250,50 @@ height:auto;
 <img class="capa" src="foto1.jpg.jpeg">
 
 <div class="info">
-
-<p>PLAYLIST EXCLUSIVA</p>
-
+<p>PLAYLIST ULTRA PREMIUM</p>
 <h1>João & Raissa ❤️</h1>
+<p>Minha música favorita é você.</p>
 
-<p>Cada momento ao seu lado é minha música favorita.</p>
-
-<br>
-
-<p>🎶 Um Amor Puro — Djavan</p>
-
-<button class="play" onclick="togglePlay(this,'musica2.mp3')">
+<button class="play" onclick="togglePlay(this,'musica1.mp3')">
 ▶ PLAY
 </button>
 
 </div>
 </div>
 
-<!-- ÁLBUNS -->
 <div class="secao">
-<h2>📀 Nossos Álbuns</h2>
+<h2>📀 Nossos Momentos</h2>
 
 <div class="grid">
 
 <div class="album">
 <img src="foto2.jpg.jpeg">
-<h3>Flores Para Você</h3>
-<p>Porque você merece todo amor do mundo.</p>
-<button class="play" onclick="togglePlay(this,'musica1.mp3')">▶ PLAY</button>
+<h3>Flores</h3>
+<button class="play" onclick="togglePlay(this,'musica2.mp3')">▶ PLAY</button>
 </div>
 
 <div class="album">
 <img src="foto3.jpg.jpeg">
-<h3>Nossa Vibe</h3>
-<p>Música, sorrisos e você.</p>
+<h3>Vibe</h3>
 <button class="play" onclick="togglePlay(this,'musica3.mp3')">▶ PLAY</button>
 </div>
 
 <div class="album">
 <img src="foto4.jpg.jpeg">
 <h3>Refúgio</h3>
-<p>Meu lugar favorito é ao seu lado.</p>
 <button class="play" onclick="togglePlay(this,'musica4.mp3')">▶ PLAY</button>
 </div>
 
-<div class="album">
-<img src="foto5.jpg.jpeg">
-<h3>Nosso Destino</h3>
-<p>O melhor ainda está por vir.</p>
-<button class="play" onclick="togglePlay(this,'musica5.mp3')">▶ PLAY</button>
-</div>
-
-<div class="album">
-<img src="foto6.jpg.jpeg">
-<h3>Pra Sempre</h3>
-<p>Cada capítulo vale a pena.</p>
-<button class="play" onclick="togglePlay(this,'musica6.mp3')">▶ PLAY</button>
-</div>
-
-<div class="album">
-<img src="foto7.jpg.jpeg">
-<h3>Memórias</h3>
-<p>Momentos que guardarei para sempre.</p>
-<button class="play" onclick="togglePlay(this,'musica7.mp3')">▶ PLAY</button>
-</div>
-
 </div>
 </div>
 
-<!-- CARTA -->
 <div class="secao">
-<h2>💌 Carta Para Raissa</h2>
+<h2>💌 Carta</h2>
 
 <div class="carta">
 Meu amor,<br><br>
-Desde o dia 19/06/2025 minha vida ficou mais bonita.<br><br>
-Obrigado por tudo ❤️
+Você transformou minha vida em música.<br><br>
+❤️
 </div>
 
 </div>
@@ -321,7 +313,6 @@ function togglePlay(btn, src){
 
 const player = document.getElementById("player");
 
-/* se clicar no mesmo */
 if(atualBtn === btn){
 player.pause();
 btn.innerHTML = "▶ PLAY";
@@ -330,13 +321,11 @@ atualBtn = null;
 return;
 }
 
-/* parar anterior */
 if(atualBtn){
 atualBtn.innerHTML = "▶ PLAY";
 atualBtn.classList.remove("ativo");
 }
 
-/* tocar nova música */
 player.src = src;
 player.play();
 
@@ -344,7 +333,6 @@ btn.innerHTML = "⏸ PAUSAR";
 btn.classList.add("ativo");
 
 atualBtn = btn;
-
 }
 
 </script>
