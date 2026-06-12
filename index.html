@@ -10,13 +10,8 @@
 
 <style>
 
-/* RESET */
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Montserrat',sans-serif;
-}
+/* BASE */
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Montserrat',sans-serif;}
 
 body{
 background:#121212;
@@ -24,67 +19,24 @@ color:white;
 overflow-x:hidden;
 }
 
-/* INTRO WRAPPED (TELA CINEMATOGRÁFICA) */
-.intro{
-position:fixed;
-inset:0;
-background:black;
-display:flex;
-align-items:center;
-justify-content:center;
-flex-direction:column;
-z-index:9999;
-animation:fadeOut 2s ease 3s forwards;
-}
-
-.intro h1{
-font-size:40px;
-color:#1DB954;
-}
-
-.intro p{
-color:#aaa;
-margin-top:10px;
-}
-
-@keyframes fadeOut{
-to{opacity:0;visibility:hidden;}
-}
-
-/* FUNDO PREMIUM */
-body::before{
-content:"";
-position:fixed;
-inset:0;
-background:radial-gradient(circle at 20% 20%, #5a0017, transparent 40%),
-radial-gradient(circle at 80% 80%, #1DB95433, transparent 40%);
-animation:bg 10s ease-in-out infinite alternate;
-z-index:0;
-}
-
-@keyframes bg{
-from{transform:scale(1);}
-to{transform:scale(1.1);}
-}
-
 /* LOGIN */
 .login{
 position:fixed;
 inset:0;
+background:#000;
 display:flex;
 flex-direction:column;
 align-items:center;
 justify-content:center;
-background:#000;
-z-index:9998;
 gap:12px;
+z-index:9999;
 }
 
 .login input{
 padding:10px;
 border:none;
 border-radius:8px;
-width:200px;
+width:220px;
 }
 
 .login button{
@@ -94,6 +46,22 @@ border:none;
 border-radius:20px;
 color:white;
 font-weight:700;
+}
+
+/* FUNDO WRAPPED */
+body::before{
+content:"";
+position:fixed;
+inset:0;
+background:radial-gradient(circle at 20% 20%, #5a0017, transparent 40%),
+radial-gradient(circle at 80% 80%, #1DB95433, transparent 40%);
+animation:bg 10s infinite alternate;
+z-index:0;
+}
+
+@keyframes bg{
+from{transform:scale(1);}
+to{transform:scale(1.1);}
 }
 
 /* CORAÇÕES */
@@ -139,13 +107,7 @@ color:#1DB954;
 margin-bottom:40px;
 }
 
-.sidebar ul{list-style:none;}
-.sidebar li{
-padding:10px 0;
-color:#aaa;
-}
-
-/* CONTEÚDO */
+/* CONTENT */
 .content{
 margin-left:260px;
 width:100%;
@@ -174,10 +136,10 @@ box-shadow:0 20px 40px rgba(0,0,0,.5);
 to{transform:rotate(360deg);}
 }
 
-.info h1{font-size:50px;}
+.info h1{font-size:48px;}
 .info p{color:#ddd;}
 
-/* WRAPPED STATS */
+/* STATS */
 .stats{
 margin-top:30px;
 display:grid;
@@ -194,19 +156,42 @@ text-align:center;
 
 .card h2{
 color:#1DB954;
-font-size:26px;
 }
 
-/* PLAY */
+/* ALBUMS */
+.grid{
+margin-top:40px;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px;
+}
+
+.album{
+background:#181818;
+padding:15px;
+border-radius:15px;
+transition:.3s;
+}
+
+.album:hover{transform:translateY(-5px);}
+
+.album img{
+width:100%;
+height:220px;
+object-fit:cover;
+border-radius:10px;
+}
+
 .play{
-margin-top:20px;
-padding:12px 25px;
+margin-top:10px;
 background:#1DB954;
 border:none;
-border-radius:30px;
+padding:10px;
+border-radius:20px;
 color:white;
 font-weight:700;
 cursor:pointer;
+width:100%;
 }
 
 /* CARTA */
@@ -245,8 +230,8 @@ font-weight:700;
 @media(max-width:900px){
 .sidebar{display:none;}
 .content{margin-left:0;padding:20px;}
-.info h1{font-size:32px;}
 .capa{width:180px;height:180px;}
+.info h1{font-size:32px;}
 }
 
 </style>
@@ -254,15 +239,9 @@ font-weight:700;
 
 <body>
 
-<!-- INTRO -->
-<div class="intro">
-<h1>Spotify Wrapped ❤️</h1>
-<p>João & Raissa</p>
-</div>
-
 <!-- LOGIN -->
 <div class="login" id="login">
-<h2>🔐 Acesso Secreto</h2>
+<h2>🔐 Acesso</h2>
 <input type="password" id="senha">
 <button onclick="entrar()">Entrar</button>
 </div>
@@ -274,15 +253,9 @@ font-weight:700;
 <!-- SIDEBAR -->
 <div class="sidebar">
 <div class="logo">🎵 Wrapped</div>
-<ul>
-<li>❤️ Amor</li>
-<li>🎧 Músicas</li>
-<li>📊 Estatísticas</li>
-<li>💌 Carta</li>
-</ul>
 </div>
 
-<!-- CONTEÚDO -->
+<!-- CONTENT -->
 <div class="content">
 
 <div class="header">
@@ -291,42 +264,65 @@ font-weight:700;
 
 <div class="info">
 <h1>João & Raissa ❤️</h1>
-<p>Seu ano em forma de música</p>
-
-<button class="play" onclick="play('musica2.mp3')">▶ PLAY</button>
+<p>Seu Wrapped do amor</p>
 </div>
 
 </div>
 
-<!-- WRAPPED STATS -->
+<!-- STATS -->
 <div class="stats">
-
-<div class="card">
-<h2 id="dias">0</h2>
-<p>Dias juntos</p>
+<div class="card"><h2 id="dias">0</h2><p>Dias juntos</p></div>
+<div class="card"><h2>12</h2><p>Músicas</p></div>
+<div class="card"><h2>∞</h2><p>Memórias</p></div>
 </div>
 
-<div class="card">
-<h2>12</h2>
-<p>Músicas do amor</p>
+<!-- ALBUMS (MÚLTIPLAS MÚSICAS DE VOLTA) -->
+<div class="grid">
+
+<div class="album">
+<img src="foto2.jpg.jpeg">
+<h3>Flores Para Você</h3>
+<button class="play" onclick="play('musica1.mp3','Flores')">▶ PLAY</button>
 </div>
 
-<div class="card">
-<h2>∞</h2>
-<p>Memórias criadas</p>
+<div class="album">
+<img src="foto3.jpg.jpeg">
+<h3>Nossa Vibe</h3>
+<button class="play" onclick="play('musica3.mp3','Vibe')">▶ PLAY</button>
+</div>
+
+<div class="album">
+<img src="foto4.jpg.jpeg">
+<h3>Refúgio</h3>
+<button class="play" onclick="play('musica4.mp3','Refúgio')">▶ PLAY</button>
+</div>
+
+<div class="album">
+<img src="foto5.jpg.jpeg">
+<h3>Destino</h3>
+<button class="play" onclick="play('musica5.mp3','Destino')">▶ PLAY</button>
+</div>
+
+<div class="album">
+<img src="foto6.jpg.jpeg">
+<h3>Pra Sempre</h3>
+<button class="play" onclick="play('musica6.mp3','Pra Sempre')">▶ PLAY</button>
+</div>
+
+<div class="album">
+<img src="foto7.jpg.jpeg">
+<h3>Memórias</h3>
+<button class="play" onclick="play('musica7.mp3','Memórias')">▶ PLAY</button>
 </div>
 
 </div>
 
 <!-- CARTA -->
 <div class="carta">
-💌 Meu amor,<br><br>
-Esse é nosso Wrapped — cada segundo contigo virou música.<br><br>
-Te amo ❤️
+💌 Meu amor, esse é nosso Wrapped ❤️
 </div>
 
 </div>
-
 </div>
 
 <!-- PLAYER -->
@@ -341,33 +337,32 @@ const audio = document.getElementById("audio");
 
 /* LOGIN */
 function entrar(){
-const senha = document.getElementById("senha").value;
-if(senha === "amor"){
+if(document.getElementById("senha").value === "amor"){
 document.getElementById("login").style.display="none";
 document.getElementById("app").style.opacity="1";
 }
 }
 
-/* MUSIC */
-function play(src){
+/* PLAY MUSIC */
+function play(src,name){
 audio.src = src;
 audio.play();
-document.getElementById("status").innerText="🎧 Tocando";
+document.getElementById("status").innerText = "🎧 " + name;
 }
 
+/* TOGGLE */
 function toggle(){
 audio.paused ? audio.play() : audio.pause();
 }
 
-/* DIAS JUNTOS */
+/* DIAS */
 const inicio = new Date("2025-06-19");
-const hoje = new Date();
-const dias = Math.floor((hoje-inicio)/(1000*60*60*24));
-document.getElementById("dias").innerText = dias;
+document.getElementById("dias").innerText =
+Math.floor((new Date()-inicio)/(1000*60*60*24));
 
 /* CORAÇÕES */
 function heart(){
-const h = document.createElement("div");
+const h=document.createElement("div");
 h.className="heart";
 h.innerHTML="❤️";
 h.style.left=Math.random()*100+"vw";
