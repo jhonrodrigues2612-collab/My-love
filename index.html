@@ -75,6 +75,12 @@ pointer-events:none;
 z-index:1;
 }
 
+/* ✨ upgrade leve */
+.heart{
+opacity:.85;
+filter: drop-shadow(0 0 6px rgba(255,77,109,.6));
+}
+
 @keyframes float{
 0%{transform:translateY(0);opacity:0;}
 10%{opacity:1;}
@@ -130,6 +136,9 @@ border-radius:50%;
 object-fit:cover;
 animation:spin 12s linear infinite;
 box-shadow:0 20px 40px rgba(0,0,0,.5);
+
+/* ✨ glow premium */
+filter: drop-shadow(0 0 18px rgba(29,185,84,.25));
 }
 
 @keyframes spin{
@@ -239,6 +248,20 @@ margin-bottom:4px;
 .capa{width:180px;height:180px;}
 .info h1{font-size:32px;}
 }
+
+/* ===== UPGRADES ===== */
+
+/* animação play ativo */
+.play:active{
+transform:scale(0.96);
+}
+
+/* progress mobile feel */
+input[type="range"]{
+accent-color:#1DB954;
+}
+
+/* partículas mais suaves já aplicadas via JS */
 
 </style>
 </head>
@@ -377,23 +400,20 @@ function toggle(){
 audio.paused ? audio.play() : audio.pause();
 }
 
-/* DURAÇÃO + METADATA */
+/* TEMPO */
 audio.addEventListener("loadedmetadata", () => {
 durationEl.innerText = formatTime(audio.duration);
 });
 
-/* PROGRESSO */
 audio.addEventListener("timeupdate", () => {
 progress.value = (audio.currentTime / audio.duration) * 100 || 0;
 currentTimeEl.innerText = formatTime(audio.currentTime);
 });
 
-/* SEEK BAR */
 progress.addEventListener("input", () => {
 audio.currentTime = (progress.value / 100) * audio.duration;
 });
 
-/* FORMAT TIME */
 function formatTime(sec){
 if(isNaN(sec)) return "0:00";
 const m = Math.floor(sec/60);
