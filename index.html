@@ -2,7 +2,7 @@
 <html lang="pt-br">
 <head>
 <meta charset="UTF-8">
-<title>Nosso Spotify ❤️</title>
+<title>Nosso Álbum ❤️</title>
 
 <style>
 body {
@@ -12,33 +12,33 @@ body {
   color: white;
 }
 
-/* título */
+/* topo */
 .header {
   padding: 20px;
+  background: #000;
+  color: #1DB954;
   font-size: 20px;
   font-weight: bold;
-  color: #1DB954;
-  background: #000;
 }
 
-/* grid de fotos */
+/* cards */
 .container {
   padding: 15px;
 }
 
-/* card */
 .card {
   position: relative;
-  margin-bottom: 20px;
+  margin-bottom: 25px;
+  max-width: 350px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* foto */
 .photo {
   width: 100%;
-  max-width: 350px;
   border-radius: 15px;
   display: block;
-  margin: auto;
 }
 
 /* botão play */
@@ -46,31 +46,30 @@ body {
   position: absolute;
   bottom: 15px;
   right: 15px;
-  width: 55px;
-  height: 55px;
+  width: 58px;
+  height: 58px;
   border-radius: 50%;
   border: none;
   background: #1DB954;
   color: white;
-  font-size: 20px;
+  font-size: 22px;
   cursor: pointer;
-  box-shadow: 0 0 10px #1DB954;
-  transition: 0.3s;
+  box-shadow: 0 0 12px rgba(29,185,84,0.7);
+  transition: 0.25s;
 }
 
-/* hover */
 .play-btn:hover {
   transform: scale(1.1);
 }
 
-/* animação quando tocando */
+/* animação Spotify */
 .playing {
-  animation: pulse 1.2s infinite;
+  animation: pulse 1.3s infinite;
 }
 
 @keyframes pulse {
-  0% { box-shadow: 0 0 0 0 rgba(29,185,84,0.7); }
-  70% { box-shadow: 0 0 0 15px rgba(29,185,84,0); }
+  0% { box-shadow: 0 0 0 0 rgba(29,185,84,0.6); }
+  70% { box-shadow: 0 0 0 18px rgba(29,185,84,0); }
   100% { box-shadow: 0 0 0 0 rgba(29,185,84,0); }
 }
 
@@ -86,7 +85,7 @@ iframe {
 <body>
 
 <div class="header">
-🎧 Nosso Spotify ❤️
+🎧 Nosso Álbum Spotify ❤️
 </div>
 
 <div class="container">
@@ -94,8 +93,9 @@ iframe {
   <!-- FOTO 1 -->
   <div class="card">
     <img class="photo" src="foto1.jpg.jpeg">
+
     <button class="play-btn"
-      onclick="togglePlay(this,'https://www.youtube.com/embed/hh9WgYHRuhU?autoplay=1')">
+      onclick="togglePlay(this,'https://open.spotify.com/intl-pt/track/76bcaYeKOKTrj9lEc9BZFU?si=9331c8daeaca48d5')">
       ▶
     </button>
   </div>
@@ -103,8 +103,9 @@ iframe {
   <!-- FOTO 2 -->
   <div class="card">
     <img class="photo" src="foto2.jpg.jpeg">
+
     <button class="play-btn"
-      onclick="togglePlay(this,'https://www.youtube.com/embed/dhYOPzcsbGM?autoplay=1')">
+      onclick="togglePlay(this,'https://open.spotify.com/intl-pt/track/04h9o3gtRD7fvGafF7ukJj?si=47488055d72742c2')">
       ▶
     </button>
   </div>
@@ -112,6 +113,7 @@ iframe {
   <!-- FOTO 3 -->
   <div class="card">
     <img class="photo" src="foto3.jpg.jpeg">
+
     <button class="play-btn"
       onclick="togglePlay(this,'https://www.youtube.com/embed/kJQP7kiw5Fk?autoplay=1')">
       ▶
@@ -128,23 +130,25 @@ let currentBtn = null;
 
 function togglePlay(btn, url) {
 
-  // se clicar no mesmo botão → pausa
+  const player = document.getElementById("player");
+
+  // se clicar no mesmo → pausa
   if (currentBtn === btn) {
-    document.getElementById("player").src = "";
+    player.src = "";
     btn.innerText = "▶";
     btn.classList.remove("playing");
     currentBtn = null;
     return;
   }
 
-  // para anterior
+  // desliga anterior
   if (currentBtn) {
     currentBtn.innerText = "▶";
     currentBtn.classList.remove("playing");
   }
 
   // toca nova música
-  document.getElementById("player").src = url;
+  player.src = url;
 
   btn.innerText = "⏸";
   btn.classList.add("playing");
