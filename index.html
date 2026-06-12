@@ -276,18 +276,22 @@ z-index:1;
 
 <div class="card-music" onclick="play('Flores')">
 <img src="foto2.jpg.jpeg"><p>Flores</p>
+  <button class="play" onclick="play('Vibe')">▶ PLAY</button>
 </div>
 
 <div class="card-music" onclick="play('Vibe')">
 <img src="foto3.jpg.jpeg"><p>Vibe</p>
+  <button class="play" onclick="play('Flores')">▶ PLAY</button>
 </div>
 
 <div class="card-music" onclick="play('Refúgio')">
 <img src="foto4.jpg.jpeg"><p>Refúgio</p>
+  <button class="play" onclick="play('Flores')">▶ PLAY</button>
 </div>
 
 <div class="card-music" onclick="play('Destino')">
 <img src="foto5.jpg.jpeg"><p>Destino</p>
+  <button class="play" onclick="play('Flores')">▶ PLAY</button>
 </div>
 
 </div>
@@ -305,7 +309,8 @@ tempo:0,
 musicas:{}
 };
 
-let atual="";
+let atualAudio = new Audio();
+let atualNome = "";
 
 /* LOGIN */
 function entrar(){
@@ -315,13 +320,38 @@ document.getElementById("app").style.opacity="1";
 }
 }
 
-/* PLAY */
+/* MAPA DAS MÚSICAS */
+function getFile(nome){
+
+const map = {
+"Flores":"musica1.mp3",
+"Vibe":"musica2.mp3",
+"Refúgio":"musica3.mp3",
+"Destino":"musica4.mp3"
+};
+
+return map[nome];
+}
+
+/* PLAY REAL */
 function play(nome){
 
-atual = nome;
+const file = getFile(nome);
 
+if(!file){
+alert("Música não encontrada");
+return;
+}
+
+atualNome = nome;
+
+atualAudio.pause();
+atualAudio = new Audio(file);
+atualAudio.play();
+
+/* STATS */
 if(!stats.musicas[nome]){
-stats.musicas[nome]={plays:0,tempo:0};
+stats.musicas[nome]={plays:0};
 }
 
 stats.musicas[nome].plays++;
@@ -332,13 +362,13 @@ updateStats();
 
 }
 
-/* UPDATE STATS */
+/* STATS UPDATE */
 function updateStats(){
 document.getElementById("plays").innerText = stats.plays;
 document.getElementById("tempo").innerText = Math.floor(stats.tempo)+"m";
 }
 
-/* TOP */
+/* TOP MUSIC */
 function updateTop(){
 
 let top="-";
