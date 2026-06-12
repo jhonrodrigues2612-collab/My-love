@@ -10,6 +10,7 @@
 
 <style>
 
+/* RESET */
 *{
 margin:0;
 padding:0;
@@ -20,40 +21,33 @@ font-family:'Montserrat',sans-serif;
 body{
 background:#121212;
 color:white;
+overflow-x:hidden;
 }
 
-/* CORAÇÕES FLUTUANTES */
-#heart-container{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-pointer-events:none;
-overflow:hidden;
-z-index:9999;
-}
-
+/* CORAÇÕES ANIMAÇÃO */
 .heart{
-position:absolute;
+position:fixed;
 bottom:-20px;
-font-size:20px;
 color:#ff4d6d;
-animation:floatUp linear forwards;
+font-size:20px;
+animation:floatUp 6s linear infinite;
 opacity:0.8;
-filter:drop-shadow(0 0 6px rgba(255,77,109,.6));
+pointer-events:none;
+z-index:1;
 }
 
 @keyframes floatUp{
-0%{transform:translateY(0) scale(1);opacity:0;}
+0%{transform:translateY(0) scale(1); opacity:0;}
 10%{opacity:1;}
-100%{transform:translateY(-110vh) translateX(30px) scale(1.5);opacity:0;}
+100%{transform:translateY(-110vh) scale(1.8); opacity:0;}
 }
 
 /* LAYOUT */
 .spotify{
 display:flex;
 min-height:100vh;
+position:relative;
+z-index:2;
 }
 
 /* SIDEBAR */
@@ -72,10 +66,7 @@ margin-bottom:40px;
 color:#1DB954;
 }
 
-.sidebar ul{
-list-style:none;
-}
-
+.sidebar ul{list-style:none;}
 .sidebar li{
 padding:12px 0;
 color:#b3b3b3;
@@ -111,11 +102,9 @@ font-size:60px;
 margin-bottom:10px;
 }
 
-.info p{
-color:#ddd;
-}
+.info p{color:#ddd;}
 
-/* BOTÃO PLAY */
+/* PLAY BUTTON */
 .play{
 margin-top:25px;
 background:#1DB954;
@@ -157,20 +146,13 @@ object-fit:cover;
 border-radius:10px;
 }
 
-.album h3{margin-top:10px;}
-
-.album p{
-color:#b3b3b3;
-font-size:14px;
-margin-top:5px;
-}
-
-/* CARTA */
+/* CARTA (corrigida e garantida visível) */
 .carta{
 background:#181818;
 padding:25px;
 border-radius:15px;
 line-height:1.9;
+display:block;
 }
 
 /* FOOTER */
@@ -180,62 +162,60 @@ padding:50px;
 color:#b3b3b3;
 }
 
-/* =========================
-   📱 MOBILE RESPONSIVO
-========================= */
+/* PLAYER SPOTIFY FIXO */
+.player-bar{
+position:fixed;
+bottom:0;
+left:0;
+width:100%;
+background:#000;
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:12px 20px;
+z-index:999;
+border-top:1px solid #222;
+}
+
+.player-info{
+font-size:14px;
+color:#aaa;
+}
+
+.player-btn{
+background:#1DB954;
+border:none;
+padding:10px 20px;
+border-radius:30px;
+color:white;
+font-weight:700;
+cursor:pointer;
+}
+
+/* RESPONSIVO MOBILE */
 @media(max-width:900px){
 
-.sidebar{
-display:none;
-}
+.sidebar{display:none;}
 
 .content{
 margin-left:0;
 padding:20px;
 }
 
-/* HEADER MOBILE */
-.header{
-flex-direction:column;
-align-items:center;
-text-align:center;
-}
-
-.capa{
-width:100%;
-max-width:320px;
-height:auto;
-}
-
 .info h1{
 font-size:34px;
 }
 
-.info p{
-font-size:14px;
-}
-
-/* BOTÃO MOBILE */
-.play{
+.capa{
 width:100%;
-padding:18px;
-font-size:16px;
+height:auto;
 }
 
-/* GRID MOBILE */
-.grid{
-grid-template-columns:1fr;
+.player-bar{
+flex-direction:column;
+gap:8px;
 }
 
-.album img{
-height:200px;
-}
-
-/* CARTA MOBILE */
-.carta{
-font-size:14px;
-line-height:1.6;
-}
 }
 
 </style>
@@ -243,10 +223,10 @@ line-height:1.6;
 
 <body>
 
-<!-- CORAÇÕES -->
-<div id="heart-container"></div>
-
+<!-- AUDIO -->
 <audio id="player"></audio>
+
+<!-- CORAÇÕES JS GERADOS -->
 
 <div class="spotify">
 
@@ -257,7 +237,7 @@ line-height:1.6;
 <li>🏠 Início</li>
 <li>❤️ João & Raissa</li>
 <li>🎶 Música</li>
-<li>📀 Nossos Álbuns</li>
+<li>📀 Álbuns</li>
 <li>💌 Carta</li>
 </ul>
 </div>
@@ -266,78 +246,79 @@ line-height:1.6;
 <div class="content">
 
 <div class="header">
-
 <img class="capa" src="foto1.jpg.jpeg">
 
 <div class="info">
-
 <p>PLAYLIST EXCLUSIVA</p>
 <h1>João & Raissa ❤️</h1>
 <p>Cada momento ao seu lado é minha música favorita.</p>
 
-<br>
-
-<p>🎶 Um Amor Puro — Djavan</p>
-
-<button class="play" onclick="togglePlay(this,'musica2.mp3')">
+<button class="play" onclick="playMusic('musica2.mp3','Um Amor Puro')">
 ▶ PLAY
 </button>
-
 </div>
 </div>
 
 <!-- ÁLBUNS -->
+<div class="secao">
+<h2>📀 Nossos Álbuns</h2>
+
 <div class="grid">
 
 <div class="album">
 <img src="foto2.jpg.jpeg">
 <h3>Flores Para Você</h3>
 <p>Porque você merece todo amor do mundo.</p>
-<button class="play" onclick="togglePlay(this,'musica1.mp3')">▶ PLAY</button>
+<button class="play" onclick="playMusic('musica1.mp3','Flores')">▶ PLAY</button>
 </div>
 
 <div class="album">
 <img src="foto3.jpg.jpeg">
 <h3>Nossa Vibe</h3>
 <p>Música, sorrisos e você.</p>
-<button class="play" onclick="togglePlay(this,'musica3.mp3')">▶ PLAY</button>
+<button class="play" onclick="playMusic('musica3.mp3','Vibe')">▶ PLAY</button>
 </div>
 
 <div class="album">
 <img src="foto4.jpg.jpeg">
 <h3>Refúgio</h3>
 <p>Meu lugar favorito é ao seu lado.</p>
-<button class="play" onclick="togglePlay(this,'musica4.mp3')">▶ PLAY</button>
+<button class="play" onclick="playMusic('musica4.mp3','Refúgio')">▶ PLAY</button>
 </div>
 
 <div class="album">
 <img src="foto5.jpg.jpeg">
 <h3>Nosso Destino</h3>
 <p>O melhor ainda está por vir.</p>
-<button class="play" onclick="togglePlay(this,'musica5.mp3')">▶ PLAY</button>
+<button class="play" onclick="playMusic('musica5.mp3','Destino')">▶ PLAY</button>
 </div>
 
 <div class="album">
 <img src="foto6.jpg.jpeg">
 <h3>Pra Sempre</h3>
 <p>Cada capítulo vale a pena.</p>
-<button class="play" onclick="togglePlay(this,'musica6.mp3')">▶ PLAY</button>
+<button class="play" onclick="playMusic('musica6.mp3','Pra Sempre')">▶ PLAY</button>
 </div>
 
 <div class="album">
 <img src="foto7.jpg.jpeg">
 <h3>Memórias</h3>
 <p>Momentos que guardarei para sempre.</p>
-<button class="play" onclick="togglePlay(this,'musica7.mp3')">▶ PLAY</button>
+<button class="play" onclick="playMusic('musica7.mp3','Memórias')">▶ PLAY</button>
 </div>
 
 </div>
+</div>
 
-<!-- CARTA -->
-<div class="carta" style="margin-top:40px;">
+<!-- CARTA (agora aparece corretamente) -->
+<div class="secao">
+<h2>💌 Carta Para Raissa</h2>
+
+<div class="carta">
 Meu amor,<br><br>
 Desde o dia 19/06/2025 minha vida ficou mais bonita.<br><br>
-Obrigado por tudo ❤️
+Obrigado por cada momento ❤️
+</div>
 </div>
 
 <footer>
@@ -347,49 +328,46 @@ Feliz Dia dos Namorados ❤️
 </div>
 </div>
 
+<!-- PLAYER SPOTIFY -->
+<div class="player-bar">
+<div class="player-info" id="status">Nenhuma música tocando</div>
+<button class="player-btn" onclick="toggle()">Play / Pause</button>
+</div>
+
 <script>
 
-let atualBtn = null;
+const audio = document.getElementById("player");
+let current = "";
 
-function togglePlay(btn, src){
-
-const player = document.getElementById("player");
-
-if(atualBtn === btn){
-player.pause();
-btn.innerHTML = "▶ PLAY";
-atualBtn = null;
-return;
+function playMusic(src,name){
+audio.src = src;
+audio.play();
+current = name;
+document.getElementById("status").innerText = "🎧 Tocando: " + name;
 }
 
-if(atualBtn){
-atualBtn.innerHTML = "▶ PLAY";
+function toggle(){
+if(audio.paused){
+audio.play();
+}else{
+audio.pause();
+}
 }
 
-player.src = src;
-player.play();
-
-btn.innerHTML = "⏸ PAUSAR";
-atualBtn = btn;
-}
-
-/* corações */
-const container = document.getElementById("heart-container");
-
+/* CORAÇÕES */
 function createHeart(){
 const heart = document.createElement("div");
 heart.classList.add("heart");
 heart.innerHTML = "❤️";
+heart.style.left = Math.random()*100 + "vw";
+heart.style.fontSize = (16 + Math.random()*20) + "px";
+heart.style.animationDuration = (4 + Math.random()*4) + "s";
+document.body.appendChild(heart);
 
-heart.style.left = Math.random()*100+"vw";
-heart.style.animationDuration = (3+Math.random()*5)+"s";
-heart.style.fontSize = (12+Math.random()*20)+"px";
-
-container.appendChild(heart);
-setTimeout(()=>heart.remove(),8000);
+setTimeout(()=>heart.remove(),7000);
 }
 
-setInterval(createHeart,250);
+setInterval(createHeart,300);
 
 </script>
 
