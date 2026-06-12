@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>João & Raissa ❤️</title>
+<title>João & Raissa ❤️ Wrapped</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600;700;800&display=swap" rel="stylesheet">
 
 <style>
 
@@ -24,28 +24,101 @@ color:white;
 overflow-x:hidden;
 }
 
-/* CORAÇÕES ANIMAÇÃO */
+/* INTRO WRAPPED (TELA CINEMATOGRÁFICA) */
+.intro{
+position:fixed;
+inset:0;
+background:black;
+display:flex;
+align-items:center;
+justify-content:center;
+flex-direction:column;
+z-index:9999;
+animation:fadeOut 2s ease 3s forwards;
+}
+
+.intro h1{
+font-size:40px;
+color:#1DB954;
+}
+
+.intro p{
+color:#aaa;
+margin-top:10px;
+}
+
+@keyframes fadeOut{
+to{opacity:0;visibility:hidden;}
+}
+
+/* FUNDO PREMIUM */
+body::before{
+content:"";
+position:fixed;
+inset:0;
+background:radial-gradient(circle at 20% 20%, #5a0017, transparent 40%),
+radial-gradient(circle at 80% 80%, #1DB95433, transparent 40%);
+animation:bg 10s ease-in-out infinite alternate;
+z-index:0;
+}
+
+@keyframes bg{
+from{transform:scale(1);}
+to{transform:scale(1.1);}
+}
+
+/* LOGIN */
+.login{
+position:fixed;
+inset:0;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+background:#000;
+z-index:9998;
+gap:12px;
+}
+
+.login input{
+padding:10px;
+border:none;
+border-radius:8px;
+width:200px;
+}
+
+.login button{
+padding:10px 20px;
+background:#1DB954;
+border:none;
+border-radius:20px;
+color:white;
+font-weight:700;
+}
+
+/* CORAÇÕES */
 .heart{
 position:fixed;
 bottom:-20px;
+font-size:18px;
 color:#ff4d6d;
-font-size:20px;
-animation:floatUp 6s linear infinite;
-opacity:0.8;
+animation:float 6s linear infinite;
 pointer-events:none;
 z-index:1;
 }
 
-@keyframes floatUp{
-0%{transform:translateY(0) scale(1); opacity:0;}
+@keyframes float{
+0%{transform:translateY(0);opacity:0;}
 10%{opacity:1;}
-100%{transform:translateY(-110vh) scale(1.8); opacity:0;}
+100%{transform:translateY(-110vh);opacity:0;}
 }
 
-/* LAYOUT */
+/* APP */
 .spotify{
 display:flex;
 min-height:100vh;
+opacity:0;
+transition:1s;
 position:relative;
 z-index:2;
 }
@@ -60,17 +133,16 @@ height:100%;
 }
 
 .logo{
-font-size:30px;
+font-size:28px;
 font-weight:800;
-margin-bottom:40px;
 color:#1DB954;
+margin-bottom:40px;
 }
 
 .sidebar ul{list-style:none;}
 .sidebar li{
-padding:12px 0;
-color:#b3b3b3;
-font-size:18px;
+padding:10px 0;
+color:#aaa;
 }
 
 /* CONTEÚDO */
@@ -78,144 +150,103 @@ font-size:18px;
 margin-left:260px;
 width:100%;
 padding:40px;
-background:linear-gradient(to bottom,#5a0017,#121212 35%);
+background:linear-gradient(to bottom,#5a0017,#121212);
 }
 
 /* HEADER */
 .header{
 display:flex;
 gap:30px;
-align-items:end;
+align-items:center;
 flex-wrap:wrap;
 }
 
 .capa{
-width:300px;
-height:300px;
+width:260px;
+height:260px;
+border-radius:50%;
 object-fit:cover;
-border-radius:12px;
+animation:spin 12s linear infinite;
 box-shadow:0 20px 40px rgba(0,0,0,.5);
 }
 
-.info h1{
-font-size:60px;
-margin-bottom:10px;
+@keyframes spin{
+to{transform:rotate(360deg);}
 }
 
+.info h1{font-size:50px;}
 .info p{color:#ddd;}
 
-/* PLAY BUTTON */
-.play{
-margin-top:25px;
-background:#1DB954;
-color:white;
-border:none;
-padding:15px 40px;
-border-radius:50px;
-font-size:18px;
-font-weight:700;
-cursor:pointer;
-transition:.3s;
-}
-
-.play.ativo{
-transform:scale(1.05);
-box-shadow:0 0 20px rgba(29,185,84,.6);
-}
-
-/* GRID */
-.grid{
+/* WRAPPED STATS */
+.stats{
+margin-top:30px;
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-gap:20px;
+grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+gap:15px;
 }
 
-.album{
+.card{
 background:#181818;
-padding:15px;
-border-radius:15px;
-transition:.3s;
-}
-
-.album:hover{transform:translateY(-5px);}
-
-.album img{
-width:100%;
-height:220px;
-object-fit:cover;
-border-radius:10px;
-}
-
-/* CARTA (corrigida e garantida visível) */
-.carta{
-background:#181818;
-padding:25px;
-border-radius:15px;
-line-height:1.9;
-display:block;
-}
-
-/* FOOTER */
-footer{
+padding:20px;
+border-radius:12px;
 text-align:center;
-padding:50px;
-color:#b3b3b3;
 }
 
-/* PLAYER SPOTIFY FIXO */
-.player-bar{
-position:fixed;
-bottom:0;
-left:0;
-width:100%;
-background:#000;
-display:flex;
-align-items:center;
-justify-content:space-between;
-padding:12px 20px;
-z-index:999;
-border-top:1px solid #222;
+.card h2{
+color:#1DB954;
+font-size:26px;
 }
 
-.player-info{
-font-size:14px;
-color:#aaa;
-}
-
-.player-btn{
+/* PLAY */
+.play{
+margin-top:20px;
+padding:12px 25px;
 background:#1DB954;
 border:none;
-padding:10px 20px;
 border-radius:30px;
 color:white;
 font-weight:700;
 cursor:pointer;
 }
 
-/* RESPONSIVO MOBILE */
-@media(max-width:900px){
-
-.sidebar{display:none;}
-
-.content{
-margin-left:0;
-padding:20px;
+/* CARTA */
+.carta{
+background:#181818;
+padding:25px;
+border-radius:12px;
+margin-top:40px;
+line-height:1.8;
 }
 
-.info h1{
-font-size:34px;
-}
-
-.capa{
+/* PLAYER */
+.player{
+position:fixed;
+bottom:0;
+left:0;
 width:100%;
-height:auto;
+background:#000;
+padding:12px 20px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+z-index:999;
 }
 
-.player-bar{
-flex-direction:column;
-gap:8px;
+.player button{
+background:#1DB954;
+border:none;
+padding:10px 20px;
+border-radius:20px;
+color:white;
+font-weight:700;
 }
 
+/* MOBILE */
+@media(max-width:900px){
+.sidebar{display:none;}
+.content{margin-left:0;padding:20px;}
+.info h1{font-size:32px;}
+.capa{width:180px;height:180px;}
 }
 
 </style>
@@ -223,21 +254,30 @@ gap:8px;
 
 <body>
 
-<!-- AUDIO -->
-<audio id="player"></audio>
+<!-- INTRO -->
+<div class="intro">
+<h1>Spotify Wrapped ❤️</h1>
+<p>João & Raissa</p>
+</div>
 
-<!-- CORAÇÕES JS GERADOS -->
+<!-- LOGIN -->
+<div class="login" id="login">
+<h2>🔐 Acesso Secreto</h2>
+<input type="password" id="senha">
+<button onclick="entrar()">Entrar</button>
+</div>
 
-<div class="spotify">
+<audio id="audio"></audio>
+
+<div class="spotify" id="app">
 
 <!-- SIDEBAR -->
 <div class="sidebar">
-<div class="logo">🎵 Spotify</div>
+<div class="logo">🎵 Wrapped</div>
 <ul>
-<li>🏠 Início</li>
-<li>❤️ João & Raissa</li>
-<li>🎶 Música</li>
-<li>📀 Álbuns</li>
+<li>❤️ Amor</li>
+<li>🎧 Músicas</li>
+<li>📊 Estatísticas</li>
 <li>💌 Carta</li>
 </ul>
 </div>
@@ -246,128 +286,95 @@ gap:8px;
 <div class="content">
 
 <div class="header">
+
 <img class="capa" src="foto1.jpg.jpeg">
 
 <div class="info">
-<p>PLAYLIST EXCLUSIVA</p>
 <h1>João & Raissa ❤️</h1>
-<p>Cada momento ao seu lado é minha música favorita.</p>
+<p>Seu ano em forma de música</p>
 
-<button class="play" onclick="playMusic('musica2.mp3','Um Amor Puro')">
-▶ PLAY
-</button>
-</div>
-</div>
-
-<!-- ÁLBUNS -->
-<div class="secao">
-<h2>📀 Nossos Álbuns</h2>
-
-<div class="grid">
-
-<div class="album">
-<img src="foto2.jpg.jpeg">
-<h3>Flores Para Você</h3>
-<p>Porque você merece todo amor do mundo.</p>
-<button class="play" onclick="playMusic('musica1.mp3','Flores')">▶ PLAY</button>
-</div>
-
-<div class="album">
-<img src="foto3.jpg.jpeg">
-<h3>Nossa Vibe</h3>
-<p>Música, sorrisos e você.</p>
-<button class="play" onclick="playMusic('musica3.mp3','Vibe')">▶ PLAY</button>
-</div>
-
-<div class="album">
-<img src="foto4.jpg.jpeg">
-<h3>Refúgio</h3>
-<p>Meu lugar favorito é ao seu lado.</p>
-<button class="play" onclick="playMusic('musica4.mp3','Refúgio')">▶ PLAY</button>
-</div>
-
-<div class="album">
-<img src="foto5.jpg.jpeg">
-<h3>Nosso Destino</h3>
-<p>O melhor ainda está por vir.</p>
-<button class="play" onclick="playMusic('musica5.mp3','Destino')">▶ PLAY</button>
-</div>
-
-<div class="album">
-<img src="foto6.jpg.jpeg">
-<h3>Pra Sempre</h3>
-<p>Cada capítulo vale a pena.</p>
-<button class="play" onclick="playMusic('musica6.mp3','Pra Sempre')">▶ PLAY</button>
-</div>
-
-<div class="album">
-<img src="foto7.jpg.jpeg">
-<h3>Memórias</h3>
-<p>Momentos que guardarei para sempre.</p>
-<button class="play" onclick="playMusic('musica7.mp3','Memórias')">▶ PLAY</button>
+<button class="play" onclick="play('musica2.mp3')">▶ PLAY</button>
 </div>
 
 </div>
+
+<!-- WRAPPED STATS -->
+<div class="stats">
+
+<div class="card">
+<h2 id="dias">0</h2>
+<p>Dias juntos</p>
 </div>
 
-<!-- CARTA (agora aparece corretamente) -->
-<div class="secao">
-<h2>💌 Carta Para Raissa</h2>
+<div class="card">
+<h2>12</h2>
+<p>Músicas do amor</p>
+</div>
 
+<div class="card">
+<h2>∞</h2>
+<p>Memórias criadas</p>
+</div>
+
+</div>
+
+<!-- CARTA -->
 <div class="carta">
-Meu amor,<br><br>
-Desde o dia 19/06/2025 minha vida ficou mais bonita.<br><br>
-Obrigado por cada momento ❤️
-</div>
-</div>
-
-<footer>
-Feliz Dia dos Namorados ❤️
-</footer>
-
-</div>
+💌 Meu amor,<br><br>
+Esse é nosso Wrapped — cada segundo contigo virou música.<br><br>
+Te amo ❤️
 </div>
 
-<!-- PLAYER SPOTIFY -->
-<div class="player-bar">
-<div class="player-info" id="status">Nenhuma música tocando</div>
-<button class="player-btn" onclick="toggle()">Play / Pause</button>
+</div>
+
+</div>
+
+<!-- PLAYER -->
+<div class="player">
+<div id="status">Nenhuma música</div>
+<button onclick="toggle()">Play/Pause</button>
 </div>
 
 <script>
 
-const audio = document.getElementById("player");
-let current = "";
+const audio = document.getElementById("audio");
 
-function playMusic(src,name){
+/* LOGIN */
+function entrar(){
+const senha = document.getElementById("senha").value;
+if(senha === "amor"){
+document.getElementById("login").style.display="none";
+document.getElementById("app").style.opacity="1";
+}
+}
+
+/* MUSIC */
+function play(src){
 audio.src = src;
 audio.play();
-current = name;
-document.getElementById("status").innerText = "🎧 Tocando: " + name;
+document.getElementById("status").innerText="🎧 Tocando";
 }
 
 function toggle(){
-if(audio.paused){
-audio.play();
-}else{
-audio.pause();
+audio.paused ? audio.play() : audio.pause();
 }
-}
+
+/* DIAS JUNTOS */
+const inicio = new Date("2025-06-19");
+const hoje = new Date();
+const dias = Math.floor((hoje-inicio)/(1000*60*60*24));
+document.getElementById("dias").innerText = dias;
 
 /* CORAÇÕES */
-function createHeart(){
-const heart = document.createElement("div");
-heart.classList.add("heart");
-heart.innerHTML = "❤️";
-heart.style.left = Math.random()*100 + "vw";
-heart.style.fontSize = (16 + Math.random()*20) + "px";
-heart.style.animationDuration = (4 + Math.random()*4) + "s";
-document.body.appendChild(heart);
-
-setTimeout(()=>heart.remove(),7000);
+function heart(){
+const h = document.createElement("div");
+h.className="heart";
+h.innerHTML="❤️";
+h.style.left=Math.random()*100+"vw";
+document.body.appendChild(h);
+setTimeout(()=>h.remove(),6000);
 }
-
-setInterval(createHeart,300);
+setInterval(heart,300);
 
 </script>
 
