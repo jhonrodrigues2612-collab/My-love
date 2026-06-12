@@ -45,15 +45,9 @@ filter:drop-shadow(0 0 6px rgba(255,77,109,.6));
 }
 
 @keyframes floatUp{
-0%{
-transform:translateY(0) scale(1);
-opacity:0;
-}
+0%{transform:translateY(0) scale(1);opacity:0;}
 10%{opacity:1;}
-100%{
-transform:translateY(-110vh) translateX(30px) scale(1.5);
-opacity:0;
-}
+100%{transform:translateY(-110vh) translateX(30px) scale(1.5);opacity:0;}
 }
 
 /* LAYOUT */
@@ -140,15 +134,6 @@ transform:scale(1.05);
 box-shadow:0 0 20px rgba(29,185,84,.6);
 }
 
-/* SEÇÕES */
-.secao{
-margin-top:60px;
-}
-
-.secao h2{
-margin-bottom:20px;
-}
-
 /* GRID */
 .grid{
 display:grid;
@@ -163,9 +148,7 @@ border-radius:15px;
 transition:.3s;
 }
 
-.album:hover{
-transform:translateY(-5px);
-}
+.album:hover{transform:translateY(-5px);}
 
 .album img{
 width:100%;
@@ -174,9 +157,7 @@ object-fit:cover;
 border-radius:10px;
 }
 
-.album h3{
-margin-top:10px;
-}
+.album h3{margin-top:10px;}
 
 .album p{
 color:#b3b3b3;
@@ -184,7 +165,7 @@ font-size:14px;
 margin-top:5px;
 }
 
-/* CARTA (AGORA FUNCIONA NORMAL) */
+/* CARTA */
 .carta{
 background:#181818;
 padding:25px;
@@ -199,7 +180,9 @@ padding:50px;
 color:#b3b3b3;
 }
 
-/* RESPONSIVO */
+/* =========================
+   📱 MOBILE RESPONSIVO
+========================= */
 @media(max-width:900px){
 
 .sidebar{
@@ -208,10 +191,14 @@ display:none;
 
 .content{
 margin-left:0;
+padding:20px;
 }
 
-.info h1{
-font-size:38px;
+/* HEADER MOBILE */
+.header{
+flex-direction:column;
+align-items:center;
+text-align:center;
 }
 
 .capa{
@@ -220,6 +207,35 @@ max-width:320px;
 height:auto;
 }
 
+.info h1{
+font-size:34px;
+}
+
+.info p{
+font-size:14px;
+}
+
+/* BOTÃO MOBILE */
+.play{
+width:100%;
+padding:18px;
+font-size:16px;
+}
+
+/* GRID MOBILE */
+.grid{
+grid-template-columns:1fr;
+}
+
+.album img{
+height:200px;
+}
+
+/* CARTA MOBILE */
+.carta{
+font-size:14px;
+line-height:1.6;
+}
 }
 
 </style>
@@ -230,7 +246,6 @@ height:auto;
 <!-- CORAÇÕES -->
 <div id="heart-container"></div>
 
-<!-- AUDIO PLAYER REAL -->
 <audio id="player"></audio>
 
 <div class="spotify">
@@ -257,9 +272,7 @@ height:auto;
 <div class="info">
 
 <p>PLAYLIST EXCLUSIVA</p>
-
 <h1>João & Raissa ❤️</h1>
-
 <p>Cada momento ao seu lado é minha música favorita.</p>
 
 <br>
@@ -274,9 +287,6 @@ height:auto;
 </div>
 
 <!-- ÁLBUNS -->
-<div class="secao">
-<h2>📀 Nossos Álbuns</h2>
-
 <div class="grid">
 
 <div class="album">
@@ -322,18 +332,12 @@ height:auto;
 </div>
 
 </div>
-</div>
 
 <!-- CARTA -->
-<div class="secao">
-<h2>💌 Carta Para Raissa</h2>
-
-<div class="carta">
+<div class="carta" style="margin-top:40px;">
 Meu amor,<br><br>
 Desde o dia 19/06/2025 minha vida ficou mais bonita.<br><br>
 Obrigado por tudo ❤️
-</div>
-
 </div>
 
 <footer>
@@ -345,7 +349,6 @@ Feliz Dia dos Namorados ❤️
 
 <script>
 
-/* PLAYER */
 let atualBtn = null;
 
 function togglePlay(btn, src){
@@ -355,26 +358,22 @@ const player = document.getElementById("player");
 if(atualBtn === btn){
 player.pause();
 btn.innerHTML = "▶ PLAY";
-btn.classList.remove("ativo");
 atualBtn = null;
 return;
 }
 
 if(atualBtn){
 atualBtn.innerHTML = "▶ PLAY";
-atualBtn.classList.remove("ativo");
 }
 
 player.src = src;
 player.play();
 
 btn.innerHTML = "⏸ PAUSAR";
-btn.classList.add("ativo");
-
 atualBtn = btn;
 }
 
-/* CORAÇÕES FLUTUANTES */
+/* corações */
 const container = document.getElementById("heart-container");
 
 function createHeart(){
@@ -382,16 +381,15 @@ const heart = document.createElement("div");
 heart.classList.add("heart");
 heart.innerHTML = "❤️";
 
-heart.style.left = Math.random() * 100 + "vw";
-heart.style.animationDuration = (3 + Math.random() * 5) + "s";
-heart.style.fontSize = (12 + Math.random() * 20) + "px";
+heart.style.left = Math.random()*100+"vw";
+heart.style.animationDuration = (3+Math.random()*5)+"s";
+heart.style.fontSize = (12+Math.random()*20)+"px";
 
 container.appendChild(heart);
-
-setTimeout(() => heart.remove(), 8000);
+setTimeout(()=>heart.remove(),8000);
 }
 
-setInterval(createHeart, 250);
+setInterval(createHeart,250);
 
 </script>
 
