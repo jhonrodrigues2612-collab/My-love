@@ -377,7 +377,7 @@ function toggle(){
 audio.paused ? audio.play() : audio.pause();
 }
 
-/* TEMPO TOTAL */
+/* DURAÇÃO + METADATA */
 audio.addEventListener("loadedmetadata", () => {
 durationEl.innerText = formatTime(audio.duration);
 });
@@ -388,12 +388,12 @@ progress.value = (audio.currentTime / audio.duration) * 100 || 0;
 currentTimeEl.innerText = formatTime(audio.currentTime);
 });
 
-/* SEEK */
+/* SEEK BAR */
 progress.addEventListener("input", () => {
 audio.currentTime = (progress.value / 100) * audio.duration;
 });
 
-/* FORMATAR TEMPO */
+/* FORMAT TIME */
 function formatTime(sec){
 if(isNaN(sec)) return "0:00";
 const m = Math.floor(sec/60);
