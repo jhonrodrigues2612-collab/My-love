@@ -4,58 +4,28 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>João & Raissa ❤️ Wrapped</title>
+<title>João & Raissa ❤️ App Wrapped</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600;700;800&display=swap" rel="stylesheet">
 
 <style>
 
-/* BASE */
+/* ===== BASE ===== */
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Montserrat',sans-serif;}
 
 body{
-background:#121212;
-color:white;
-overflow-x:hidden;
-}
-
-/* LOGIN */
-.login{
-position:fixed;
-inset:0;
 background:#000;
-display:flex;
-flex-direction:column;
-align-items:center;
-justify-content:center;
-gap:12px;
-z-index:9999;
+overflow:hidden;
 }
 
-.login input{
-padding:10px;
-border:none;
-border-radius:8px;
-width:220px;
-}
-
-.login button{
-padding:10px 20px;
-background:#1DB954;
-border:none;
-border-radius:20px;
-color:white;
-font-weight:700;
-}
-
-/* FUNDO WRAPPED */
+/* BACKGROUND PREMIUM */
 body::before{
 content:"";
 position:fixed;
 inset:0;
 background:radial-gradient(circle at 20% 20%, #5a0017, transparent 40%),
 radial-gradient(circle at 80% 80%, #1DB95433, transparent 40%);
-animation:bg 10s infinite alternate;
+animation:bg 8s infinite alternate;
 z-index:0;
 }
 
@@ -64,21 +34,199 @@ from{transform:scale(1);}
 to{transform:scale(1.1);}
 }
 
-/* CORAÇÕES */
+/* ===== CELULAR ===== */
+.phone{
+width:100%;
+height:100vh;
+display:flex;
+align-items:center;
+justify-content:center;
+position:relative;
+z-index:2;
+}
+
+.frame{
+width:380px;
+height:760px;
+background:#0a0a0a;
+border-radius:40px;
+box-shadow:0 30px 80px rgba(0,0,0,.8);
+border:8px solid #111;
+overflow:hidden;
+position:relative;
+}
+
+.notch{
+width:150px;
+height:25px;
+background:#000;
+position:absolute;
+top:10px;
+left:50%;
+transform:translateX(-50%);
+border-radius:20px;
+z-index:5;
+}
+
+/* ===== SPLASH ===== */
+.splash{
+position:absolute;
+inset:0;
+background:#000;
+display:flex;
+align-items:center;
+justify-content:center;
+color:#1DB954;
+z-index:10;
+animation:fadeOut 2s 2.5s forwards;
+}
+
+@keyframes fadeOut{
+to{opacity:0;visibility:hidden;}
+}
+
+/* ===== LOGIN ===== */
+.login{
+position:absolute;
+inset:0;
+background:#000;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+gap:12px;
+color:white;
+z-index:9;
+}
+
+.login input{
+padding:10px;
+border-radius:10px;
+border:none;
+width:220px;
+}
+
+.login button{
+background:#1DB954;
+border:none;
+padding:10px 20px;
+border-radius:20px;
+font-weight:700;
+color:white;
+}
+
+/* ===== APP ===== */
+.app{
+position:absolute;
+inset:0;
+background:#121212;
+opacity:0;
+transition:1s;
+overflow-y:auto;
+padding-bottom:80px;
+}
+
+/* HEADER */
+.header{
+padding:25px;
+text-align:center;
+}
+
+.capa{
+width:160px;
+height:160px;
+border-radius:50%;
+object-fit:cover;
+animation:spin 12s linear infinite;
+box-shadow:0 0 25px rgba(29,185,84,.3);
+}
+
+@keyframes spin{
+to{transform:rotate(360deg);}
+}
+
+h1{
+color:white;
+font-size:22px;
+margin-top:10px;
+}
+
+p{color:#bbb;font-size:13px;}
+
+/* BUTTON */
+.play{
+margin-top:12px;
+background:#1DB954;
+border:none;
+padding:12px;
+border-radius:30px;
+color:white;
+font-weight:700;
+width:100%;
+}
+
+/* STATS */
+.stats{
+padding:15px;
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:10px;
+}
+
+.card{
+background:#181818;
+padding:12px;
+border-radius:15px;
+text-align:center;
+}
+
+.card h2{color:#1DB954;font-size:18px;}
+
+/* GRID */
+.grid{
+padding:15px;
+display:flex;
+flex-direction:column;
+gap:10px;
+}
+
+.card-music{
+background:#181818;
+padding:10px;
+border-radius:12px;
+display:flex;
+gap:10px;
+align-items:center;
+}
+
+.card-music img{
+width:50px;
+height:50px;
+border-radius:10px;
+object-fit:cover;
+}
+
+/* PLAYER */
+.player{
+position:absolute;
+bottom:0;
+left:0;
+width:100%;
+background:#000;
+padding:10px;
+border-top:1px solid #222;
+color:white;
+}
+
+/* HEARTS */
 .heart{
 position:fixed;
 bottom:-20px;
-font-size:18px;
+font-size:16px;
 color:#ff4d6d;
 animation:float 6s linear infinite;
 pointer-events:none;
 z-index:1;
-}
-
-/* ✨ upgrade leve */
-.heart{
-opacity:.85;
-filter: drop-shadow(0 0 6px rgba(255,77,109,.6));
 }
 
 @keyframes float{
@@ -87,338 +235,123 @@ filter: drop-shadow(0 0 6px rgba(255,77,109,.6));
 100%{transform:translateY(-110vh);opacity:0;}
 }
 
-/* APP */
-.spotify{
-display:flex;
-min-height:100vh;
-opacity:0;
-transition:1s;
-position:relative;
-z-index:2;
-}
-
-/* SIDEBAR */
-.sidebar{
-width:260px;
-background:#000;
-padding:30px;
-position:fixed;
-height:100%;
-}
-
-.logo{
-font-size:28px;
-font-weight:800;
-color:#1DB954;
-margin-bottom:40px;
-}
-
-/* CONTENT */
-.content{
-margin-left:260px;
-width:100%;
-padding:40px;
-background:linear-gradient(to bottom,#5a0017,#121212);
-}
-
-/* HEADER */
-.header{
-display:flex;
-gap:30px;
-align-items:center;
-flex-wrap:wrap;
-}
-
-.capa{
-width:260px;
-height:260px;
-border-radius:50%;
-object-fit:cover;
-animation:spin 12s linear infinite;
-box-shadow:0 20px 40px rgba(0,0,0,.5);
-
-/* ✨ glow premium */
-filter: drop-shadow(0 0 18px rgba(29,185,84,.25));
-}
-
-@keyframes spin{
-to{transform:rotate(360deg);}
-}
-
-.info h1{font-size:48px;}
-.info p{color:#ddd;}
-
-/* STATS */
-.stats{
-margin-top:30px;
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-gap:15px;
-}
-
-.card{
-background:#181818;
-padding:20px;
-border-radius:12px;
-text-align:center;
-}
-
-.card h2{color:#1DB954;}
-
-/* ALBUMS */
-.grid{
-margin-top:40px;
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-gap:20px;
-}
-
-.album{
-background:#181818;
-padding:15px;
-border-radius:15px;
-transition:.3s;
-}
-
-.album:hover{transform:translateY(-5px);}
-
-.album img{
-width:100%;
-height:220px;
-object-fit:cover;
-border-radius:10px;
-}
-
-.play{
-margin-top:10px;
-background:#1DB954;
-border:none;
-padding:10px;
-border-radius:20px;
-color:white;
-font-weight:700;
-cursor:pointer;
-width:100%;
-}
-
-/* CARTA */
-.carta{
-background:#181818;
-padding:25px;
-border-radius:12px;
-margin-top:40px;
-line-height:1.8;
-}
-
-/* PLAYER */
-.player{
-position:fixed;
-bottom:0;
-left:0;
-width:100%;
-background:rgba(0,0,0,0.85);
-backdrop-filter:blur(12px);
-padding:12px 20px;
-display:flex;
-justify-content:space-between;
-align-items:center;
-z-index:999;
-border-top:1px solid rgba(255,255,255,0.1);
-}
-
-.player button{
-background:#1DB954;
-border:none;
-padding:10px 18px;
-border-radius:50px;
-color:white;
-font-weight:700;
-cursor:pointer;
-}
-
-#status{
-font-weight:700;
-margin-bottom:4px;
-}
-
-/* MOBILE */
-@media(max-width:900px){
-.sidebar{display:none;}
-.content{margin-left:0;padding:20px;}
-.capa{width:180px;height:180px;}
-.info h1{font-size:32px;}
-}
-
-/* ===== UPGRADES ===== */
-
-/* animação play ativo */
-.play:active{
-transform:scale(0.96);
-}
-
-/* progress mobile feel */
-input[type="range"]{
-accent-color:#1DB954;
-}
-
-/* partículas mais suaves já aplicadas via JS */
-
 </style>
 </head>
 
 <body>
 
-<!-- LOGIN -->
+<div class="phone">
+<div class="frame">
+
+<div class="notch"></div>
+
+<div class="splash">🎧 Spotify Wrapped</div>
+
 <div class="login" id="login">
-<h2>🔐 Acesso</h2>
+<h3>🔐 Entrar</h3>
 <input type="password" id="senha">
 <button onclick="entrar()">Entrar</button>
 </div>
 
-<audio id="audio"></audio>
-
-<div class="spotify" id="app">
-
-<div class="sidebar">
-<div class="logo">🎵 Wrapped</div>
-</div>
-
-<div class="content">
+<div class="app" id="app">
 
 <div class="header">
-
 <img class="capa" src="foto1.jpg.jpeg">
-
-<div class="info">
 <h1>João & Raissa ❤️</h1>
-<p>Minha vida é mais completa com você</p>
+<p>Sua experiência Wrapped</p>
 
-<button class="play" onclick="play('musica2.mp3','Flores')">▶ PLAY</button>
-
-</div>
+<button class="play" onclick="play('Flores')">▶ PLAY</button>
 </div>
 
+<!-- STATS WRAPPED -->
 <div class="stats">
+<div class="card"><h2 id="plays">0</h2><p>Plays</p></div>
+<div class="card"><h2 id="tempo">0m</h2><p>Tempo</p></div>
+<div class="card"><h2 id="top">-</h2><p>Top música</p></div>
 <div class="card"><h2 id="dias">0</h2><p>Dias juntos</p></div>
-<div class="card"><h2>12</h2><p>Músicas</p></div>
-<div class="card"><h2>∞</h2><p>Memórias</p></div>
 </div>
 
+<!-- MUSICAS -->
 <div class="grid">
 
-<div class="album">
-<img src="foto2.jpg.jpeg">
-<h3>Flores Para Você</h3>
-<button class="play" onclick="play('musica1.mp3','Flores')">▶ PLAY</button>
+<div class="card-music" onclick="play('Flores')">
+<img src="foto2.jpg.jpeg"><p>Flores</p>
 </div>
 
-<div class="album">
-<img src="foto3.jpg.jpeg">
-<h3>Nossa Vibe</h3>
-<button class="play" onclick="play('musica3.mp3','Vibe')">▶ PLAY</button>
+<div class="card-music" onclick="play('Vibe')">
+<img src="foto3.jpg.jpeg"><p>Vibe</p>
 </div>
 
-<div class="album">
-<img src="foto4.jpg.jpeg">
-<h3>Refúgio</h3>
-<button class="play" onclick="play('musica4.mp3','Refúgio')">▶ PLAY</button>
+<div class="card-music" onclick="play('Refúgio')">
+<img src="foto4.jpg.jpeg"><p>Refúgio</p>
 </div>
 
-<div class="album">
-<img src="foto5.jpg.jpeg">
-<h3>Destino</h3>
-<button class="play" onclick="play('musica5.mp3','Destino')">▶ PLAY</button>
-</div>
-
-<div class="album">
-<img src="foto6.jpg.jpeg">
-<h3>Pra Sempre</h3>
-<button class="play" onclick="play('musica6.mp3','Pra Sempre')">▶ PLAY</button>
-</div>
-
-<div class="album">
-<img src="foto7.jpg.jpeg">
-<h3>Memórias</h3>
-<button class="play" onclick="play('musica7.mp3','Memórias')">▶ PLAY</button>
+<div class="card-music" onclick="play('Destino')">
+<img src="foto5.jpg.jpeg"><p>Destino</p>
 </div>
 
 </div>
 
-<div class="carta">
-💌 Meu amor, obrigado por fazer parte de todos os momentos, EU TE AMO ❤️
-</div>
-
 </div>
 </div>
-
-<!-- PLAYER COMPLETO -->
-<div class="player">
-
-<div style="display:flex; flex-direction:column; width:100%;">
-
-<div id="status">Nenhuma música</div>
-
-<div style="display:flex; align-items:center; gap:10px;">
-<span id="currentTime">0:00</span>
-
-<input type="range" id="progress" min="0" max="100" value="0"
-style="width:100%; accent-color:#1DB954;">
-
-<span id="duration">0:00</span>
-</div>
-
-</div>
-
-<button onclick="toggle()">⏯</button>
-
 </div>
 
 <script>
 
-const audio = document.getElementById("audio");
-const progress = document.getElementById("progress");
-const currentTimeEl = document.getElementById("currentTime");
-const durationEl = document.getElementById("duration");
+/* WRAPPED ENGINE */
+let stats = {
+plays:0,
+tempo:0,
+musicas:{}
+};
+
+let atual="";
 
 /* LOGIN */
 function entrar(){
-if(document.getElementById("senha").value === "amor"){
+if(document.getElementById("senha").value==="amor"){
 document.getElementById("login").style.display="none";
 document.getElementById("app").style.opacity="1";
 }
 }
 
 /* PLAY */
-function play(src,name){
-audio.src = src;
-audio.play();
-document.getElementById("status").innerText = "🎧 " + name;
+function play(nome){
+
+atual = nome;
+
+if(!stats.musicas[nome]){
+stats.musicas[nome]={plays:0,tempo:0};
 }
 
-/* TOGGLE */
-function toggle(){
-audio.paused ? audio.play() : audio.pause();
+stats.musicas[nome].plays++;
+stats.plays++;
+
+updateTop();
+updateStats();
+
 }
 
-/* TEMPO */
-audio.addEventListener("loadedmetadata", () => {
-durationEl.innerText = formatTime(audio.duration);
-});
+/* UPDATE STATS */
+function updateStats(){
+document.getElementById("plays").innerText = stats.plays;
+document.getElementById("tempo").innerText = Math.floor(stats.tempo)+"m";
+}
 
-audio.addEventListener("timeupdate", () => {
-progress.value = (audio.currentTime / audio.duration) * 100 || 0;
-currentTimeEl.innerText = formatTime(audio.currentTime);
-});
+/* TOP */
+function updateTop(){
 
-progress.addEventListener("input", () => {
-audio.currentTime = (progress.value / 100) * audio.duration;
-});
+let top="-";
+let max=0;
 
-function formatTime(sec){
-if(isNaN(sec)) return "0:00";
-const m = Math.floor(sec/60);
-const s = Math.floor(sec%60);
-return m + ":" + (s < 10 ? "0"+s : s);
+for(let m in stats.musicas){
+if(stats.musicas[m].plays>max){
+max=stats.musicas[m].plays;
+top=m;
+}
+}
+
+document.getElementById("top").innerText=top;
 }
 
 /* DIAS */
