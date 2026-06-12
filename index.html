@@ -1,7 +1,47 @@
-<!-- ADICIONE ISSO LOGO APÓS <body> -->
-<div id="heart-container"></div>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>João & Raissa ❤️</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 
 <style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Montserrat',sans-serif;
+}
+
+body{
+background:#121212;
+color:white;
+overflow:hidden;
+}
+
+/* FUNDO PREMIUM LEVE */
+body::before{
+content:"";
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:radial-gradient(circle at top, rgba(255,0,80,0.25), transparent 60%),
+           radial-gradient(circle at bottom, rgba(0,150,255,0.15), transparent 60%);
+z-index:-1;
+animation:moveBg 10s ease-in-out infinite alternate;
+}
+
+@keyframes moveBg{
+from{transform:scale(1);}
+to{transform:scale(1.1);}
+}
+
 /* CORAÇÕES FLUTUANTES */
 #heart-container{
 position:fixed;
@@ -29,17 +69,331 @@ filter:drop-shadow(0 0 6px rgba(255,77,109,.6));
 transform:translateY(0) scale(1);
 opacity:0;
 }
-10%{
-opacity:1;
-}
+10%{opacity:1;}
 100%{
 transform:translateY(-110vh) translateX(30px) scale(1.5);
 opacity:0;
 }
 }
+
+/* LAYOUT */
+.spotify{
+display:flex;
+min-height:100vh;
+}
+
+/* SIDEBAR */
+.sidebar{
+width:260px;
+background:#000;
+padding:30px;
+position:fixed;
+height:100%;
+z-index:2;
+}
+
+.logo{
+font-size:30px;
+font-weight:800;
+margin-bottom:40px;
+color:#1DB954;
+}
+
+.sidebar ul{
+list-style:none;
+}
+
+.sidebar li{
+padding:12px 0;
+color:#b3b3b3;
+font-size:18px;
+}
+
+/* CONTEÚDO */
+.content{
+margin-left:260px;
+width:100%;
+padding:40px;
+background:linear-gradient(to bottom,#5a0017,#121212 35%);
+}
+
+/* HEADER */
+.header{
+display:flex;
+gap:30px;
+align-items:end;
+flex-wrap:wrap;
+}
+
+.capa{
+width:300px;
+height:300px;
+object-fit:cover;
+border-radius:12px;
+box-shadow:0 20px 40px rgba(0,0,0,.5);
+}
+
+.info h1{
+font-size:60px;
+margin-bottom:10px;
+}
+
+.info p{
+color:#ddd;
+}
+
+/* BOTÃO PLAY */
+.play{
+margin-top:25px;
+background:#1DB954;
+color:white;
+border:none;
+padding:15px 40px;
+border-radius:50px;
+font-size:18px;
+font-weight:700;
+cursor:pointer;
+transition:.3s;
+}
+
+.play.ativo{
+transform:scale(1.05);
+box-shadow:0 0 20px rgba(29,185,84,.6);
+}
+
+/* SEÇÕES */
+.secao{
+margin-top:60px;
+}
+
+.secao h2{
+margin-bottom:20px;
+}
+
+/* GRID */
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px;
+}
+
+.album{
+background:#181818;
+padding:15px;
+border-radius:15px;
+transition:.3s;
+}
+
+.album:hover{
+transform:translateY(-5px);
+}
+
+.album img{
+width:100%;
+height:220px;
+object-fit:cover;
+border-radius:10px;
+}
+
+.album h3{
+margin-top:10px;
+}
+
+.album p{
+color:#b3b3b3;
+font-size:14px;
+margin-top:5px;
+}
+
+/* CARTA */
+.carta{
+background:#181818;
+padding:25px;
+border-radius:15px;
+line-height:1.9;
+}
+
+/* FOOTER */
+footer{
+text-align:center;
+padding:50px;
+color:#b3b3b3;
+}
+
+/* RESPONSIVO */
+@media(max-width:900px){
+
+.sidebar{
+display:none;
+}
+
+.content{
+margin-left:0;
+}
+
+.info h1{
+font-size:38px;
+}
+
+.capa{
+width:100%;
+max-width:320px;
+height:auto;
+}
+}
+
 </style>
+</head>
+
+<body>
+
+<!-- CORAÇÕES -->
+<div id="heart-container"></div>
+
+<!-- AUDIO PLAYER REAL -->
+<audio id="player"></audio>
+
+<div class="spotify">
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+<div class="logo">🎵 Spotify</div>
+<ul>
+<li>🏠 Início</li>
+<li>❤️ João & Raissa</li>
+<li>🎶 Música</li>
+<li>📀 Nossos Álbuns</li>
+<li>💌 Carta</li>
+</ul>
+</div>
+
+<!-- CONTEÚDO -->
+<div class="content">
+
+<div class="header">
+
+<img class="capa" src="foto1.jpg.jpeg">
+
+<div class="info">
+
+<p>PLAYLIST EXCLUSIVA</p>
+
+<h1>João & Raissa ❤️</h1>
+
+<p>Cada momento ao seu lado é minha música favorita.</p>
+
+<br>
+
+<p>🎶 Um Amor Puro — Djavan</p>
+
+<button class="play" onclick="togglePlay(this,'musica2.mp3')">
+▶ PLAY
+</button>
+
+</div>
+</div>
+
+<!-- ÁLBUNS -->
+<div class="secao">
+<h2>📀 Nossos Álbuns</h2>
+
+<div class="grid">
+
+<div class="album">
+<img src="foto2.jpg.jpeg">
+<h3>Flores Para Você</h3>
+<p>Porque você merece todo amor do mundo.</p>
+<button class="play" onclick="togglePlay(this,'musica1.mp3')">▶ PLAY</button>
+</div>
+
+<div class="album">
+<img src="foto3.jpg.jpeg">
+<h3>Nossa Vibe</h3>
+<p>Música, sorrisos e você.</p>
+<button class="play" onclick="togglePlay(this,'musica3.mp3')">▶ PLAY</button>
+</div>
+
+<div class="album">
+<img src="foto4.jpg.jpeg">
+<h3>Refúgio</h3>
+<p>Meu lugar favorito é ao seu lado.</p>
+<button class="play" onclick="togglePlay(this,'musica4.mp3')">▶ PLAY</button>
+</div>
+
+<div class="album">
+<img src="foto5.jpg.jpeg">
+<h3>Nosso Destino</h3>
+<p>O melhor ainda está por vir.</p>
+<button class="play" onclick="togglePlay(this,'musica5.mp3')">▶ PLAY</button>
+</div>
+
+<div class="album">
+<img src="foto6.jpg.jpeg">
+<h3>Pra Sempre</h3>
+<p>Cada capítulo vale a pena.</p>
+<button class="play" onclick="togglePlay(this,'musica6.mp3')">▶ PLAY</button>
+</div>
+
+<div class="album">
+<img src="foto7.jpg.jpeg">
+<h3>Memórias</h3>
+<p>Momentos que guardarei para sempre.</p>
+<button class="play" onclick="togglePlay(this,'musica7.mp3')">▶ PLAY</button>
+</div>
+
+</div>
+</div>
+
+<!-- CARTA -->
+<div class="secao">
+<h2>💌 Carta Para Raissa</h2>
+
+<div class="carta">
+Meu amor,<br><br>
+Desde o dia 19/06/2025 minha vida ficou mais bonita.<br><br>
+Obrigado por tudo ❤️
+</div>
+
+</div>
+
+<footer>
+Feliz Dia dos Namorados ❤️
+</footer>
+
+</div>
+</div>
 
 <script>
+
+let atualBtn = null;
+
+function togglePlay(btn, src){
+
+const player = document.getElementById("player");
+
+if(atualBtn === btn){
+player.pause();
+btn.innerHTML = "▶ PLAY";
+btn.classList.remove("ativo");
+atualBtn = null;
+return;
+}
+
+if(atualBtn){
+atualBtn.innerHTML = "▶ PLAY";
+atualBtn.classList.remove("ativo");
+}
+
+player.src = src;
+player.play();
+
+btn.innerHTML = "⏸ PAUSAR";
+btn.classList.add("ativo");
+
+atualBtn = btn;
+}
+
+/* CORAÇÕES FLUTUANTES */
 const container = document.getElementById("heart-container");
 
 function createHeart(){
@@ -53,10 +407,12 @@ heart.style.fontSize = (12 + Math.random() * 20) + "px";
 
 container.appendChild(heart);
 
-setTimeout(() => {
-heart.remove();
-}, 8000);
+setTimeout(() => heart.remove(), 8000);
 }
 
-setInterval(createHeart, 300);
+setInterval(createHeart, 250);
+
 </script>
+
+</body>
+</html>
