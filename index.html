@@ -200,8 +200,8 @@ height:auto;
 
 <body>
 
-<!-- PLAYER OCULTO -->
-<iframe id="player" allow="autoplay" style="display:none;"></iframe>
+<!-- AUDIO PLAYER REAL -->
+<audio id="player"></audio>
 
 <div class="spotify">
 
@@ -236,7 +236,7 @@ height:auto;
 
 <p>🎶 Um Amor Puro — Djavan</p>
 
-<button class="play" onclick="togglePlay(this,'musica.mp3.mp4')">
+<button class="play" onclick="togglePlay(this,'musica.mp3')">
 ▶ PLAY
 </button>
 
@@ -253,42 +253,42 @@ height:auto;
 <img src="foto2.jpg.jpeg">
 <h3>Flores Para Você</h3>
 <p>Porque você merece todo amor do mundo.</p>
-<button class="play" onclick="togglePlay(this,'hh9WgYHRuhU')">▶ PLAY</button>
+<button class="play" onclick="togglePlay(this,'musica2.mp3')">▶ PLAY</button>
 </div>
 
 <div class="album">
 <img src="foto3.jpg.jpeg">
 <h3>Nossa Vibe</h3>
 <p>Música, sorrisos e você.</p>
-<button class="play" onclick="togglePlay(this,'hh9WgYHRuhU')">▶ PLAY</button>
+<button class="play" onclick="togglePlay(this,'musica3.mp3')">▶ PLAY</button>
 </div>
 
 <div class="album">
 <img src="foto4.jpg.jpeg">
 <h3>Refúgio</h3>
 <p>Meu lugar favorito é ao seu lado.</p>
-<button class="play" onclick="togglePlay(this,'hh9WgYHRuhU')">▶ PLAY</button>
+<button class="play" onclick="togglePlay(this,'musica4.mp3')">▶ PLAY</button>
 </div>
 
 <div class="album">
 <img src="foto5.jpg.jpeg">
 <h3>Nosso Destino</h3>
 <p>O melhor ainda está por vir.</p>
-<button class="play" onclick="togglePlay(this,'hh9WgYHRuhU')">▶ PLAY</button>
+<button class="play" onclick="togglePlay(this,'musica5.mp3')">▶ PLAY</button>
 </div>
 
 <div class="album">
 <img src="foto6.jpg.jpeg">
 <h3>Pra Sempre</h3>
 <p>Cada capítulo vale a pena.</p>
-<button class="play" onclick="togglePlay(this,'hh9WgYHRuhU')">▶ PLAY</button>
+<button class="play" onclick="togglePlay(this,'musica6.mp3')">▶ PLAY</button>
 </div>
 
 <div class="album">
 <img src="foto7.jpg.jpeg">
 <h3>Memórias</h3>
 <p>Momentos que guardarei para sempre.</p>
-<button class="play" onclick="togglePlay(this,'hh9WgYHRuhU')">▶ PLAY</button>
+<button class="play" onclick="togglePlay(this,'musica7.mp3')">▶ PLAY</button>
 </div>
 
 </div>
@@ -317,14 +317,13 @@ Feliz Dia dos Namorados ❤️
 
 let atualBtn = null;
 
-function togglePlay(btn, id){
+function togglePlay(btn, src){
 
 const player = document.getElementById("player");
-const url = "https://www.youtube.com/embed/" + id;
 
 /* se clicar no mesmo */
 if(atualBtn === btn){
-player.src = "";
+player.pause();
 btn.innerHTML = "▶ PLAY";
 btn.classList.remove("ativo");
 atualBtn = null;
@@ -337,24 +336,15 @@ atualBtn.innerHTML = "▶ PLAY";
 atualBtn.classList.remove("ativo");
 }
 
-/* tocar novo */
-player.src = url + "?autoplay=1";
+/* tocar nova música */
+player.src = src;
+player.play();
 
 btn.innerHTML = "⏸ PAUSAR";
 btn.classList.add("ativo");
 
 atualBtn = btn;
 
-}
-
-/* contador */
-const inicio = new Date("2025-06-19");
-
-function atualizar(){
-const hoje = new Date();
-const dias = Math.floor((hoje - inicio)/(1000*60*60*24));
-document.getElementById("contador").innerHTML =
-dias + " dias vivendo nossa história ❤️";
 }
 
 </script>
