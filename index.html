@@ -154,9 +154,7 @@ border-radius:12px;
 text-align:center;
 }
 
-.card h2{
-color:#1DB954;
-}
+.card h2{color:#1DB954;}
 
 /* ALBUMS */
 .grid{
@@ -209,21 +207,29 @@ position:fixed;
 bottom:0;
 left:0;
 width:100%;
-background:#000;
+background:rgba(0,0,0,0.85);
+backdrop-filter:blur(12px);
 padding:12px 20px;
 display:flex;
 justify-content:space-between;
 align-items:center;
 z-index:999;
+border-top:1px solid rgba(255,255,255,0.1);
 }
 
 .player button{
 background:#1DB954;
 border:none;
-padding:10px 20px;
-border-radius:20px;
+padding:10px 18px;
+border-radius:50px;
 color:white;
 font-weight:700;
+cursor:pointer;
+}
+
+#status{
+font-weight:700;
+margin-bottom:4px;
 }
 
 /* MOBILE */
@@ -250,12 +256,10 @@ font-weight:700;
 
 <div class="spotify" id="app">
 
-<!-- SIDEBAR -->
 <div class="sidebar">
 <div class="logo">🎵 Wrapped</div>
 </div>
 
-<!-- CONTENT -->
 <div class="content">
 
 <div class="header">
@@ -265,19 +269,18 @@ font-weight:700;
 <div class="info">
 <h1>João & Raissa ❤️</h1>
 <p>Minha vida é mais completa com você</p>
-  <button class="play" onclick="play('musica2.mp3','Flores')">▶ PLAY</button>
-</div>
+
+<button class="play" onclick="play('musica2.mp3','Flores')">▶ PLAY</button>
 
 </div>
+</div>
 
-<!-- STATS -->
 <div class="stats">
 <div class="card"><h2 id="dias">0</h2><p>Dias juntos</p></div>
 <div class="card"><h2>12</h2><p>Músicas</p></div>
 <div class="card"><h2>∞</h2><p>Memórias</p></div>
 </div>
 
-<!-- ALBUMS (MÚLTIPLAS MÚSICAS DE VOLTA) -->
 <div class="grid">
 
 <div class="album">
@@ -318,23 +321,41 @@ font-weight:700;
 
 </div>
 
-<!-- CARTA -->
 <div class="carta">
-💌 Meu amor, obrigado por fazer parte te todos os momentos, EU TE AMO ❤️
+💌 Meu amor, obrigado por fazer parte de todos os momentos, EU TE AMO ❤️
 </div>
 
 </div>
 </div>
 
-<!-- PLAYER -->
+<!-- PLAYER COMPLETO -->
 <div class="player">
+
+<div style="display:flex; flex-direction:column; width:100%;">
+
 <div id="status">Nenhuma música</div>
-<button onclick="toggle()">Play/Pause</button>
+
+<div style="display:flex; align-items:center; gap:10px;">
+<span id="currentTime">0:00</span>
+
+<input type="range" id="progress" min="0" max="100" value="0"
+style="width:100%; accent-color:#1DB954;">
+
+<span id="duration">0:00</span>
+</div>
+
+</div>
+
+<button onclick="toggle()">⏯</button>
+
 </div>
 
 <script>
 
 const audio = document.getElementById("audio");
+const progress = document.getElementById("progress");
+const currentTimeEl = document.getElementById("currentTime");
+const durationEl = document.getElementById("duration");
 
 /* LOGIN */
 function entrar(){
@@ -344,7 +365,7 @@ document.getElementById("app").style.opacity="1";
 }
 }
 
-/* PLAY MUSIC */
+/* PLAY */
 function play(src,name){
 audio.src = src;
 audio.play();
@@ -354,6 +375,30 @@ document.getElementById("status").innerText = "🎧 " + name;
 /* TOGGLE */
 function toggle(){
 audio.paused ? audio.play() : audio.pause();
+}
+
+/* TEMPO TOTAL */
+audio.addEventListener("loadedmetadata", () => {
+durationEl.innerText = formatTime(audio.duration);
+});
+
+/* PROGRESSO */
+audio.addEventListener("timeupdate", () => {
+progress.value = (audio.currentTime / audio.duration) * 100 || 0;
+currentTimeEl.innerText = formatTime(audio.currentTime);
+});
+
+/* SEEK */
+progress.addEventListener("input", () => {
+audio.currentTime = (progress.value / 100) * audio.duration;
+});
+
+/* FORMATAR TEMPO */
+function formatTime(sec){
+if(isNaN(sec)) return "0:00";
+const m = Math.floor(sec/60);
+const s = Math.floor(sec%60);
+return m + ":" + (s < 10 ? "0"+s : s);
 }
 
 /* DIAS */
