@@ -1,160 +1,387 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<title>Nosso Álbum ❤️</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>João & Raissa ❤️</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 
 <style>
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: #121212;
-  color: white;
+
+/* =====================
+   RESET
+===================== */
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Montserrat',sans-serif;
 }
 
-/* topo */
-.header {
-  padding: 20px;
-  background: #000;
-  color: #1DB954;
-  font-size: 20px;
-  font-weight: bold;
+body{
+background:#121212;
+color:white;
 }
 
-/* cards */
-.container {
-  padding: 15px;
+/* =====================
+   LAYOUT SPOTIFY
+===================== */
+.spotify{
+display:flex;
+min-height:100vh;
 }
 
-.card {
-  position: relative;
-  margin-bottom: 25px;
-  max-width: 350px;
-  margin-left: auto;
-  margin-right: auto;
+/* SIDEBAR */
+.sidebar{
+width:260px;
+background:#000;
+padding:30px;
+position:fixed;
+height:100%;
 }
 
-/* foto */
-.photo {
-  width: 100%;
-  border-radius: 15px;
-  display: block;
+.logo{
+font-size:30px;
+font-weight:800;
+margin-bottom:40px;
+color:#1DB954;
 }
 
-/* botão play */
-.play-btn {
-  position: absolute;
-  bottom: 15px;
-  right: 15px;
-  width: 58px;
-  height: 58px;
-  border-radius: 50%;
-  border: none;
-  background: #1DB954;
-  color: white;
-  font-size: 22px;
-  cursor: pointer;
-  box-shadow: 0 0 12px rgba(29,185,84,0.7);
-  transition: 0.25s;
+.sidebar ul{
+list-style:none;
 }
 
-.play-btn:hover {
-  transform: scale(1.1);
+.sidebar li{
+padding:12px 0;
+color:#b3b3b3;
+font-size:18px;
 }
 
-/* animação Spotify */
-.playing {
-  animation: pulse 1.3s infinite;
+/* CONTEÚDO */
+.content{
+margin-left:260px;
+width:100%;
+padding:40px;
+background:linear-gradient(to bottom,#5a0017,#121212 35%);
 }
 
-@keyframes pulse {
-  0% { box-shadow: 0 0 0 0 rgba(29,185,84,0.6); }
-  70% { box-shadow: 0 0 0 18px rgba(29,185,84,0); }
-  100% { box-shadow: 0 0 0 0 rgba(29,185,84,0); }
+/* HEADER */
+.header{
+display:flex;
+gap:30px;
+align-items:end;
+flex-wrap:wrap;
 }
 
-/* player invisível */
-iframe {
-  width: 1px;
-  height: 1px;
-  opacity: 0;
+.capa{
+width:300px;
+height:300px;
+object-fit:cover;
+border-radius:12px;
+box-shadow:0 20px 40px rgba(0,0,0,.5);
 }
+
+.info h1{
+font-size:60px;
+margin-bottom:10px;
+}
+
+.info p{
+color:#ddd;
+}
+
+/* BOTÃO PLAY (SPOTIFY PREMIUM) */
+.play{
+margin-top:25px;
+background:#1DB954;
+color:white;
+border:none;
+padding:15px 40px;
+border-radius:50px;
+font-size:18px;
+font-weight:700;
+cursor:pointer;
+transition:.3s;
+}
+
+.play.ativo{
+transform:scale(1.05);
+box-shadow:0 0 20px rgba(29,185,84,.6);
+animation:pulse 1.3s infinite;
+}
+
+@keyframes pulse{
+0%{box-shadow:0 0 0 0 rgba(29,185,84,.6);}
+70%{box-shadow:0 0 0 18px rgba(29,185,84,0);}
+100%{box-shadow:0 0 0 0 rgba(29,185,84,0);}
+}
+
+/* SEÇÕES */
+.secao{
+margin-top:60px;
+}
+
+.secao h2{
+margin-bottom:20px;
+}
+
+/* GRID ÁLBUNS */
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px;
+}
+
+.album{
+background:#181818;
+padding:15px;
+border-radius:15px;
+transition:.3s;
+}
+
+.album:hover{
+transform:translateY(-5px);
+}
+
+.album img{
+width:100%;
+height:220px;
+object-fit:cover;
+border-radius:10px;
+}
+
+.album h3{
+margin-top:10px;
+}
+
+.album p{
+color:#b3b3b3;
+font-size:14px;
+margin-top:5px;
+}
+
+/* CARTA */
+.carta{
+background:#181818;
+padding:25px;
+border-radius:15px;
+line-height:1.9;
+}
+
+/* CONTADOR */
+.contador{
+font-size:28px;
+font-weight:700;
+color:#1DB954;
+}
+
+/* FOOTER */
+footer{
+text-align:center;
+padding:50px;
+color:#b3b3b3;
+}
+
+/* RESPONSIVO */
+@media(max-width:900px){
+
+.sidebar{
+display:none;
+}
+
+.content{
+margin-left:0;
+}
+
+.info h1{
+font-size:38px;
+}
+
+.capa{
+width:100%;
+max-width:320px;
+height:auto;
+}
+
+}
+
 </style>
 </head>
 
 <body>
 
+<div class="spotify">
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+
+<div class="logo">
+🎵 Spotify
+</div>
+
+<ul>
+<li>🏠 Início</li>
+<li>❤️ João & Raissa</li>
+<li>🎶 Um Amor Puro</li>
+<li>📀 Nossos Álbuns</li>
+<li>💌 Carta</li>
+</ul>
+
+</div>
+
+<!-- CONTEÚDO -->
+<div class="content">
+
 <div class="header">
-🎧 Nosso Álbum Spotify ❤️
+
+<img class="capa"
+src="foto1.jpg.jpeg">
+
+<div class="info">
+
+<p>PLAYLIST EXCLUSIVA</p>
+
+<h1>João & Raissa ❤️</h1>
+
+<p>Cada momento ao seu lado é minha música favorita.</p>
+
+<br>
+
+<p>🎶 Um Amor Puro — Djavan</p>
+
+<button class="play" onclick="togglePlay(this, 'https://open.spotify.com/intl-pt/track/76bcaYeKOKTrj9lEc9BZFU?si=25bfeed3d6564d66')">
+▶ PLAY
+</button>
+  
+</div>
 </div>
 
-<div class="container">
+<!-- TEMPO JUNTOS -->
+<div class="secao">
+<h2>❤️ Tempo juntos</h2>
+<div class="contador" id="contador"></div>
+</div>
 
-  <!-- FOTO 1 -->
-  <div class="card">
-    <img class="photo" src="foto1.jpg.jpeg">
+<!-- ÁLBUNS -->
+<div class="secao">
+<h2>📀 Nossos Álbuns</h2>
 
-    <button class="play-btn"
-      onclick="togglePlay(this,'https://open.spotify.com/intl-pt/track/76bcaYeKOKTrj9lEc9BZFU?si=9331c8daeaca48d5')">
-      ▶
-    </button>
-  </div>
+<div class="grid">
 
-  <!-- FOTO 2 -->
-  <div class="card">
-    <img class="photo" src="foto2.jpg.jpeg">
+<div class="album">
+<img src="foto2.jpg.jpeg">
+<h3>Flores Para Você</h3>
+<p>Porque você merece todo amor do mundo.</p>
 
-    <button class="play-btn"
-      onclick="togglePlay(this,'https://open.spotify.com/intl-pt/track/04h9o3gtRD7fvGafF7ukJj?si=47488055d72742c2')">
-      ▶
-    </button>
-  </div>
+  <button class="play" onclick="togglePlay(this, 'https://www.youtube.com/embed/hh9WgYHRuhU?autoplay=1')">
+▶ PLAY
+</button>
+  
+</div>
 
-  <!-- FOTO 3 -->
-  <div class="card">
-    <img class="photo" src="foto3.jpg.jpeg">
+<div class="album">
+<img src="foto3.jpg.jpeg">
+<h3>Nossa Vibe</h3>
+<p>Música, sorrisos e você.</p>
+</div>
 
-    <button class="play-btn"
-      onclick="togglePlay(this,'https://www.youtube.com/embed/kJQP7kiw5Fk?autoplay=1')">
-      ▶
-    </button>
-  </div>
+<div class="album">
+<img src="foto4.jpg.jpeg">
+<h3>Refúgio</h3>
+<p>Meu lugar favorito é ao seu lado.</p>
+</div>
+
+<div class="album">
+<img src="foto5.jpg.jpeg">
+<h3>Nosso Destino</h3>
+<p>O melhor ainda está por vir.</p>
+</div>
+
+<div class="album">
+<img src="foto6.jpg.jpeg">
+<h3>Pra Sempre</h3>
+<p>Cada capítulo vale a pena.</p>
+</div>
+
+<div class="album">
+<img src="foto7.jpg.jpeg">
+<h3>Memórias</h3>
+<p>Momentos que guardarei para sempre.</p>
+</div>
+
+</div>
+</div>
+
+<!-- CARTA -->
+<div class="secao">
+<h2>💌 Carta Para Raissa</h2>
+
+<div class="carta">
+Meu amor,<br><br>
+
+Desde o dia 19/06/2025 minha vida ficou mais bonita.<br><br>
+
+Obrigado por cada sorriso, cada abraço, cada conversa e cada momento que vivemos juntos.<br><br>
+
+Você transformou dias comuns em lembranças inesquecíveis.<br><br>
+
+Seu sorriso é minha paz.<br>
+Seu abraço é meu lugar favorito.<br>
+Sua companhia é meu presente preferido.<br><br>
+
+Se eu pudesse escolher uma música para tocar para sempre, ela teria o seu sorriso.<br><br>
+
+Eu te amo hoje, amanhã e em todos os dias que ainda virão.<br><br>
+
+❤️<br><br>
+
+Com amor,<br>
+João
+</div>
 
 </div>
 
-<!-- player oculto -->
-<iframe id="player" allow="autoplay"></iframe>
+<footer>
+Feliz Dia dos Namorados ❤️
+</footer>
 
+</div>
+
+</div>
+
+<!-- SCRIPT -->
 <script>
-let currentBtn = null;
 
-function togglePlay(btn, url) {
+const inicio = new Date("2025-06-19");
 
-  const player = document.getElementById("player");
-
-  // se clicar no mesmo → pausa
-  if (currentBtn === btn) {
-    player.src = "";
-    btn.innerText = "▶";
-    btn.classList.remove("playing");
-    currentBtn = null;
-    return;
-  }
-
-  // desliga anterior
-  if (currentBtn) {
-    currentBtn.innerText = "▶";
-    currentBtn.classList.remove("playing");
-  }
-
-  // toca nova música
-  player.src = url;
-
-  btn.innerText = "⏸";
-  btn.classList.add("playing");
-
-  currentBtn = btn;
+function atualizar(){
+const hoje = new Date();
+const dias = Math.floor((hoje - inicio)/(1000*60*60*24));
+document.getElementById("contador").innerHTML =
+dias + " dias vivendo nossa história ❤️";
 }
+
+atualizar();
+
+/* BOTÃO PLAY PREMIUM */
+let tocando = false;
+
+function togglePlay(btn){
+
+if(!tocando){
+btn.classList.add("ativo");
+btn.innerHTML = "⏸ PAUSAR";
+tocando = true;
+}else{
+btn.classList.remove("ativo");
+btn.innerHTML = "▶ PLAY";
+tocando = false;
+}
+
+}
+
 </script>
 
 </body>
