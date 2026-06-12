@@ -209,7 +209,44 @@ height:auto;
 
 </style>
 </head>
+<iframe id="player" allow="autoplay" style="display:none;"></iframe>
 
+<script>
+
+let atualBtn = null;
+
+function togglePlay(btn, url){
+
+const player = document.getElementById("player");
+
+/* se clicar no mesmo → pausa */
+if(atualBtn === btn){
+player.src = "";
+btn.innerHTML = "▶ PLAY";
+btn.classList.remove("ativo");
+atualBtn = null;
+return;
+}
+
+/* para outro que estiver tocando */
+if(atualBtn){
+atualBtn.innerHTML = "▶ PLAY";
+atualBtn.classList.remove("ativo");
+}
+
+/* toca música */
+player.src = url;
+
+/* muda botão */
+btn.innerHTML = "⏸ PAUSAR";
+btn.classList.add("ativo");
+
+atualBtn = btn;
+
+}
+
+</script>
+   
 <body>
 
 <div class="spotify">
